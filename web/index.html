@@ -51,6 +51,19 @@
   footer { text-align: center; font-size: 11.5px; color: var(--muted);
            padding: 12px 16px 28px; }
   footer a { color: inherit; }
+  #minimap { position: fixed; right: 14px; top: 96px; width: 286px;
+             background: var(--bg); border: 1px solid var(--muted);
+             border-radius: 4px; padding: 6px 6px 2px; z-index: 20;
+             box-shadow: 0 2px 10px rgba(0,0,0,0.18); pointer-events: none;
+             opacity: 0.97; }
+  #minimap svg { display: block; width: 100%; height: auto; }
+  #minimap .mm-cap { font: 11px "Segoe UI", system-ui, sans-serif;
+                     color: var(--muted); text-align: center; padding: 2px 0 1px;
+                     font-variant-numeric: tabular-nums; }
+  .mm-land { fill: var(--ink); fill-opacity: 0.10; stroke: none; }
+  .mm-pol  { stroke: var(--outline); stroke-width: 0.5; stroke-opacity: 0.5; }
+  .mm-grat { stroke: var(--ink); stroke-opacity: 0.06; fill: none; }
+  @media (max-width: 1500px) { #minimap { display: none; } }
 </style>
 </head>
 <body>
@@ -71,9 +84,15 @@
     &nbsp;&nbsp;<label class="ck"><input type="checkbox" id="nogray">
     hide stateless/unmapped</label>
     &nbsp;&nbsp;<label class="ck"><input type="checkbox" id="events-ck" checked>
-    events</label></p>
+    events</label>
+    &nbsp;&nbsp;Export: <span id="export-svg" class="mode">SVG</span>
+    &middot; <span id="export-png" class="mode">PNG</span></p>
 </header>
 <svg id="chart"></svg>
+<div id="minimap">
+  <svg id="minimap-svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet"></svg>
+  <div class="mm-cap" id="mm-cap">the world &mdash; hover the chart</div>
+</div>
 <div id="tip"></div>
 <footer>
   Data: <a href="https://doi.org/10.17026/dans-25g-gez3">HYDE 3.2.1</a> (Klein Goldewijk
@@ -88,6 +107,7 @@
 <script src="data.js"></script>
 <script src="regions.js"></script>
 <script src="events.js"></script>
+<script src="minimap.js"></script>
 <script>
 const D = HISTOMAP_DATA;
 const R = (typeof REGION_FOCUS !== "undefined") ? REGION_FOCUS : null;
@@ -396,6 +416,7 @@ let mode = "share";
 let hideGray = false;
 let showEvents = true;
 let focus = null;  // null | {type:'civ', key} | {type:'region', key, anchor}
+let mmLandG = null, mmPolG = null, mmYear = null;  // minimap state (hoisted)
 
 const stackKeys = () => hideGray ? polityKeys : [GRAY_L, ...polityKeys, GRAY_R];
 
@@ -789,6 +810,8 @@ function showTip(ev, d) {
   tip.style.left = (ev.clientX + 14) + "px";
   tip.style.top = (ev.clientY + 10) + "px";
   tip.innerHTML = html;
+  if (typeof updateMinimap === "function")
+    updateMinimap(years[i], d.raw || displayName(d.key));
 }
 
 function render(animate) {
@@ -851,9 +874,48 @@ function applyScheme() {
   buildColors();
   buildPatterns();
   buildGradients();
+  if (mmPolG) updateMinimap(mmYear ?? 1500, null);
 }
 applyScheme();
 render(false);
+
+// ---- side minimap: the political world at the hovered year --------------
+const mm = (typeof MINIMAP !== "undefined") ? MINIMAP : null;
+const mmSvg = d3.select("#minimap-svg");
+const mmCap = document.getElementById("mm-cap");
+function initMinimap() {
+  if (!mm) { document.getElementById("minimap").style.display = "none"; return; }
+  mmSvg.selectAll("*").remove();
+  const grat = mmSvg.append("g").attr("class", "mm-grat");
+  for (let lon = 0; lon <= 360; lon += 30)
+    grat.append("line").attr("x1", lon / 360 * 1000).attr("y1", 0)
+        .attr("x2", lon / 360 * 1000).attr("y2", 500);
+  for (let lat = 0; lat <= 180; lat += 30)
+    grat.append("line").attr("x1", 0).attr("y1", lat / 180 * 500)
+        .attr("x2", 1000).attr("y2", lat / 180 * 500);
+  mmLandG = mmSvg.append("g");
+  mmLandG.selectAll("path").data(mm.land).join("path")
+    .attr("class", "mm-land").attr("d", d => d);
+  mmPolG = mmSvg.append("g");
+}
+function updateMinimap(year, hi) {
+  if (!mm || !mmPolG) return;
+  mmYear = year;
+  const feats = mm.frames[String(year)] || [];
+  const sel = mmPolG.selectAll("path").data(feats, d => d.n);
+  sel.exit().remove();
+  sel.enter().append("path").attr("class", "mm-pol").merge(sel)
+    .attr("d", d => d.d)
+    .attr("fill", d => colorOf.get(d.n)
+       || familyColor(D.regions[d.n] || "ancientne", 0.5, false))
+    .attr("fill-opacity", d => hi ? (d.n === hi ? 0.95 : 0.30) : 0.82)
+    .attr("stroke-width", d => (hi && d.n === hi) ? 1.2 : 0.5)
+    .attr("stroke-opacity", d => (hi && d.n === hi) ? 0.95 : 0.5);
+  mmCap.innerHTML = (year < 0 ? -year + " BCE" : year + " CE")
+    + (hi && feats.some(f => f.n === hi) ? " · " + hi : "");
+}
+initMinimap();
+updateMinimap(1500, null);
 
 function setFocus(f) { focus = f; render(true); }
 function setMode(m) {
@@ -881,6 +943,64 @@ document.getElementById("nogray").onchange = ev => {
 document.getElementById("events-ck").onchange = ev => {
   showEvents = ev.target.checked;
   render(false);
+};
+
+// ---- poster / image export ----------------------------------------------
+// Serialize the live SVG into a self-contained document: resolve the scheme's
+// CSS variables to literal values, inline the chart stylesheet, and paint a
+// background rect. SVG is vector (ideal for true-size poster printing); PNG
+// rasterizes it at 2x. Stream/event fills are per-element attributes, so they
+// survive; only var()-driven strokes/ticks need resolving.
+function buildExportSVG() {
+  const clone = svg.node().cloneNode(true);
+  clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  const cs = getComputedStyle(document.documentElement);
+  let styleText = document.querySelector("style").textContent;
+  for (const v of ["bg", "ink", "muted", "outline", "grid", "sw"]) {
+    const val = (cs.getPropertyValue("--" + v) || "").trim();
+    styleText = styleText.replace(new RegExp("var\\(--" + v + "[^)]*\\)", "g"), val);
+  }
+  const NS = "http://www.w3.org/2000/svg";
+  const bg = (cs.getPropertyValue("--bg") || "#f5f0e6").trim();
+  const rect = document.createElementNS(NS, "rect");
+  rect.setAttribute("width", W); rect.setAttribute("height", H);
+  rect.setAttribute("fill", bg);
+  clone.insertBefore(rect, clone.firstChild);
+  const styleEl = document.createElementNS(NS, "style");
+  styleEl.textContent = styleText;
+  clone.insertBefore(styleEl, clone.firstChild);
+  return new XMLSerializer().serializeToString(clone);
+}
+function downloadBlob(blob, name) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+const exportStem = () =>
+  `demograph-${mode}${hideGray ? "-states" : ""}-${schemeKey}` +
+  (focus ? "-" + focus.key : "");
+document.getElementById("export-svg").onclick = () => {
+  downloadBlob(new Blob([buildExportSVG()], { type: "image/svg+xml;charset=utf-8" }),
+              exportStem() + ".svg");
+};
+document.getElementById("export-png").onclick = () => {
+  const scale = 2;
+  const url = URL.createObjectURL(
+    new Blob([buildExportSVG()], { type: "image/svg+xml;charset=utf-8" }));
+  const img = new Image();
+  img.onload = () => {
+    const c = document.createElement("canvas");
+    c.width = W * scale; c.height = H * scale;
+    const ctx = c.getContext("2d");
+    ctx.scale(scale, scale);
+    ctx.drawImage(img, 0, 0);
+    c.toBlob(b => { downloadBlob(b, exportStem() + "@2x.png");
+                    URL.revokeObjectURL(url); }, "image/png");
+  };
+  img.onerror = () => { URL.revokeObjectURL(url); alert("PNG export failed"); };
+  img.src = url;
 };
 document.addEventListener("keydown", ev => {
   if (ev.key === "Escape" && focus) setFocus(null);
