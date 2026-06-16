@@ -533,9 +533,8 @@ function makeStacked() {
 
 const COL_FRAC = 0.56, GAP = 16;
 
-function sideItems(stacked, keys, splitIdx, colX0, colX1) {
+function sideItems(stacked, before, after, colX0, colX1) {
   const byKey = new Map(stacked.map(l => [l.key, l]));
-  const before = keys.slice(0, splitIdx), after = keys.slice(splitIdx);
   const maxRight = d3.max(before, k => d3.max(byKey.get(k), d => xScale(d[1])));
   const minLeft = d3.min(after, k => d3.min(byKey.get(k), d => xScale(d[0])));
   const shiftL = Math.min(0, (colX0 - GAP) - (maxRight ?? M.left));
@@ -585,10 +584,16 @@ function computeItems() {
                totals: famTotals, label: FAMILY_LABEL[focus.key] || focus.key,
                isShare: true },
     }));
-    const i0 = keys.indexOf(famKeys[0]);
+    // Part the NON-family streams around the family's centre so the centered
+    // column has no gap (the family is contiguous only in color order, not in
+    // the wiggle-optimized display order).
+    const famSet = new Set(famKeys);
+    const famIdxs = famKeys.map(k => keys.indexOf(k)).filter(i => i >= 0);
+    const famCenter = famIdxs.reduce((a, b) => a + b, 0) / (famIdxs.length || 1);
+    const cBefore = [], cAfter = [];
+    keys.forEach((k, idx) => { if (!famSet.has(k)) (idx < famCenter ? cBefore : cAfter).push(k); });
     return [
-      ...sideItems(stacked, keys, i0, colX0, colX1)
-        .filter(it => !famKeys.includes(it.key)),
+      ...sideItems(stacked, cBefore, cAfter, colX0, colX1),
       ...columnLayers(lanes, famTotals, xCol),
     ];
   }
@@ -630,7 +635,7 @@ function computeItems() {
   }
   const splitIdx = Math.max(1, keys.indexOf(focus.anchor));
   return [
-    ...sideItems(stacked, keys, splitIdx, colX0, colX1),
+    ...sideItems(stacked, keys.slice(0, splitIdx), keys.slice(splitIdx), colX0, colX1),
     ...columnLayers(lanes, totals, xCol),
   ];
 }
@@ -662,6 +667,7 @@ function tryPlace(r) {
 
 function drawLabels(items) {
   labelG.selectAll("*").remove();
+  defs.selectAll("clipPath").remove();  // rebuilt per render by ensureClip; no leak
   placedRects = [];
   for (const item of items) {
     const layer = item.layer;
@@ -673,30 +679,34 @@ function drawLabels(items) {
     if (best < 0) continue;
     const laneW = item.xmap(layer[best][1]) - item.xmap(layer[best][0]);
     if (laneW < 18) continue;
-    const size = laneW > 72 ? 12.5 : 10.5;
-    const charW = size * 0.52, lineH = size + 2;
-    const maxChars = Math.floor((laneW - 4) / charW);
-    if (maxChars < 4) continue;
     const text = item.name || displayName(item.key);
+    const size = laneW > 72 ? 12.5 : 10.5;
+    const lineH = size + 2;
+    // Greedy-wrap to the lane width using MEASURED text widths (max 4 lines).
     const lines = [];
     let cur = "";
     for (const word of text.split(/\s+/)) {
       const cand = cur ? cur + " " + word : word;
-      if (cand.length <= maxChars || !cur) cur = cand;
+      if (textW(cand, size) <= laneW - 5 || !cur) cur = cand;
       else { lines.push(cur); cur = word; }
     }
     lines.push(cur);
-    if (Math.max(...lines.map(l => l.length)) > maxChars * 1.3 || lines.length > 4) continue;
+    const wmax = Math.max(...lines.map(l => textW(l, size)));
+    if (lines.length > 4 || wmax > laneW - 3) continue;
     const cx = item.xmap((layer[best][0] + layer[best][1]) / 2);
+    if (cx < M.left || cx > W - M.right) continue;  // skip off-screen parted streams
     const cy = yScale(layer[best].data.year) - ((lines.length - 1) * lineH) / 2 + 3;
-    const hw = Math.max(...lines.map(l => l.length)) * charW / 2;
-    placedRects.push({ x0: cx - hw, x1: cx + hw,
-                       y0: cy - size, y1: cy + lines.length * lineH });
+    const top = cy - size, bot = cy + (lines.length - 1) * lineH + size * 0.3;
+    // The lane must stay wide enough across the label's WHOLE height, so the
+    // text never spills past the stream's borders where the stream pinches.
+    if (minLaneW(item, top, bot, 10) < wmax + 4) continue;
+    if (!tryPlace({ x0: cx - wmax / 2 - 1, x1: cx + wmax / 2 + 1, y0: top, y1: bot })) continue;
     const bg = item.bgv
              || (item.fillv && item.fillv.startsWith("#") ? item.fillv
                  : baseColorOf(item.key));
     const st = styleFor(bg.startsWith("#") ? bg : "#888");
     const t = labelG.append("text").attr("class", "stream-label")
+      .attr("clip-path", ensureClip(item))  // hard guarantee: never crosses borders
       .attr("font-size", size).attr("fill", st.fill)
       .attr("stroke", st.halo).attr("stroke-width", size * 0.21);
     lines.forEach((ln, j) =>
@@ -731,11 +741,11 @@ function ensureClip(item) {
   return `url(#${id})`;
 }
 // Min lane width (px) across all slices whose y falls in [yA, yB] (padded).
-function minLaneW(item, yA, yB) {
+function minLaneW(item, yA, yB, pad = 36) {
   let m = Infinity;
   for (let j = 0; j < years.length; j++) {
     const yy = yScale(years[j]);
-    if (yy < yA - 36 || yy > yB + 36) continue;
+    if (yy < yA - pad || yy > yB + pad) continue;
     m = Math.min(m, item.xmap(item.layer[j][1]) - item.xmap(item.layer[j][0]));
   }
   return m;
@@ -869,6 +879,9 @@ function drawEvents(items) {
       const wOf = it => it ? it.layer[i0][1] - it.layer[i0][0] : -1;
       const l = byKey.get(GRAY_L), r = byKey.get(GRAY_R);
       item = wOf(l) >= wOf(r) ? l : r;
+      if (!item)  // hide-stateless mode: no gray band — use the widest stream
+        item = items.reduce((bi, it) =>
+          wOf(it) > wOf(bi) ? it : bi, null);
     } else item = byKey.get(e.anchor);
     if (!item) { stats.skipped++; continue; }
     if (placeEvent(e, item)) stats.placed++; else stats.skipped++;
@@ -910,9 +923,13 @@ function render(animate) {
   const items = computeItems();
   const keys = stackKeys();
   const sel = streamG.selectAll(".stream").data(items, d => d.key);
-  sel.exit().remove();
+  const exiting = sel.exit();
+  if (animate) exiting.transition().duration(450).attr("opacity", 0).remove();
+  else exiting.remove();
   const entered = sel.enter().append("path")
     .attr("class", "stream")
+    .attr("d", d => areaPath(d))        // start at final shape — no jump
+    .attr("opacity", animate ? 0 : 1)   // ...then fade in while others morph
     .on("click", (ev, d) => {
       if (focus) { setFocus(null); return; }
       const name = displayName(d.key);
@@ -932,10 +949,13 @@ function render(animate) {
     .on("mouseleave", () => { tip.style.display = "none"; });
   const merged = entered.merge(sel)
     .attr("fill", d => d.fillv || fill(d.key));
-  (animate ? merged.transition().duration(900) : merged)
+  (animate ? merged.transition("morph").duration(900).attr("opacity", 1)
+           : merged.attr("opacity", 1))
     .attr("d", d => areaPath(d));
   sepG.style("display", focus ? "none" : null);
-  if (!focus) {
+  if (focus) {
+    sepG.selectAll(".sep").remove();   // don't strand stale separators
+  } else {
     const byKey = new Map(items.map(it => [it.key, it]));
     const sepIdx = [];
     for (let i = 1; i < keys.length; i++) {
@@ -944,14 +964,17 @@ function render(animate) {
     }
     const seps = sepG.selectAll(".sep").data(sepIdx);
     seps.exit().remove();
-    const sepM = seps.enter().append("path").attr("class", "sep").merge(seps);
-    (animate ? sepM.transition().duration(900) : sepM)
+    const sepM = seps.enter().append("path").attr("class", "sep")
+      .attr("d", i => edgePath(byKey.get(keys[i]))).merge(seps);   // valid start
+    (animate ? sepM.transition("morph").duration(900) : sepM)
       .attr("d", i => edgePath(byKey.get(keys[i])));
   }
-  const annotate = () => { drawLabels(items); drawEvents(items); buildNavmap(); };
-  if (animate) setTimeout(annotate, 920);
+  const annotate = () => { annotateTimer = null; drawLabels(items); drawEvents(items); buildNavmap(); };
+  if (annotateTimer) clearTimeout(annotateTimer);
+  if (animate) annotateTimer = setTimeout(annotate, 920);
   else annotate();
 }
+let annotateTimer = null;
 const SEP_DELTA_E = 8;
 
 function applyScheme() {
