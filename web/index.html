@@ -64,9 +64,57 @@
   .mm-pol  { stroke: var(--outline); stroke-width: 0.5; stroke-opacity: 0.5; }
   .mm-grat { stroke: var(--ink); stroke-opacity: 0.06; fill: none; }
   @media (max-width: 1500px) { #minimap { display: none; } }
+  #sidebar-toggle { position: fixed; left: 12px; top: 12px; z-index: 31;
+    font: 13px "Segoe UI", system-ui, sans-serif; cursor: pointer;
+    background: var(--bg); color: var(--ink); border: 1px solid var(--muted);
+    border-radius: 4px; padding: 5px 11px; transition: left .25s ease;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12); }
+  body.sb-open #sidebar-toggle { left: 250px; }
+  #sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: 232px;
+    background: var(--bg); border-right: 1px solid var(--muted);
+    box-shadow: 2px 0 14px rgba(0,0,0,0.14); z-index: 30;
+    padding: 52px 18px 18px; overflow-y: auto; box-sizing: border-box;
+    transform: translateX(-100%); transition: transform .25s ease;
+    font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif; }
+  body.sb-open #sidebar { transform: translateX(0); }
+  #sidebar .sb-title { font-family: Georgia, serif; font-size: 18px;
+    letter-spacing: 2px; margin: 0 0 4px; color: var(--ink); }
+  #sidebar .sb-sub { font-size: 11.5px; line-height: 1.45; color: var(--muted);
+    margin: 0 0 6px; }
+  .sb-group { border-top: 1px solid var(--grid); padding: 11px 0 3px; }
+  .sb-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--muted); margin-bottom: 6px; }
+  #sidebar select { width: 100%; }
+  #sb-width .mode, #sidebar .ck { display: block; padding: 3px 0; }
+  .sb-export .mode { display: inline-block; padding: 2px 8px 2px 0; }
 </style>
 </head>
 <body>
+<button id="sidebar-toggle">&#9776; Options</button>
+<aside id="sidebar">
+  <div class="sb-title">DEMOGRAPH</div>
+  <div class="sb-sub">Four thousand years of world population, after Sparks's
+  1931 <em>Histomap</em>.</div>
+  <div class="sb-group" id="sb-width">
+    <div class="sb-label">Width</div>
+    <span id="mode-share" class="mode active">share of world</span>
+    <span id="mode-abs" class="mode">absolute population</span>
+  </div>
+  <div class="sb-group">
+    <div class="sb-label">Palette</div>
+    <select id="scheme"></select>
+  </div>
+  <div class="sb-group">
+    <div class="sb-label">Layers</div>
+    <label class="ck"><input type="checkbox" id="events-ck" checked> events</label>
+    <label class="ck"><input type="checkbox" id="nogray"> hide stateless / unmapped</label>
+  </div>
+  <div class="sb-group sb-export">
+    <div class="sb-label">Export</div>
+    <span id="export-svg" class="mode">SVG</span>
+    <span id="export-png" class="mode">PNG</span>
+  </div>
+</aside>
 <header>
   <h1>HISTOMAP&nbsp;2</h1>
   <p>Four thousand years of world history &mdash; <strong>population living under
@@ -75,18 +123,7 @@
   divergence from a parent civilization; hatched bands are unrecorded local
   states; gray is population outside any state.
   <em>Click a stream to focus its region; Shift-click focuses its civilization;
-  Esc returns.</em></p>
-  <p class="modes">Width:
-    <span id="mode-share" class="mode active">share of world</span>
-    &middot;
-    <span id="mode-abs" class="mode">absolute population</span>
-    &nbsp;&nbsp;Palette: <select id="scheme"></select>
-    &nbsp;&nbsp;<label class="ck"><input type="checkbox" id="nogray">
-    hide stateless/unmapped</label>
-    &nbsp;&nbsp;<label class="ck"><input type="checkbox" id="events-ck" checked>
-    events</label>
-    &nbsp;&nbsp;Export: <span id="export-svg" class="mode">SVG</span>
-    &middot; <span id="export-png" class="mode">PNG</span></p>
+  Esc returns. Controls in the &#9776; Options panel, top-left.</em></p>
 </header>
 <svg id="chart"></svg>
 <div id="minimap">
@@ -1001,6 +1038,11 @@ document.getElementById("export-png").onclick = () => {
   };
   img.onerror = () => { URL.revokeObjectURL(url); alert("PNG export failed"); };
   img.src = url;
+};
+const sbToggle = document.getElementById("sidebar-toggle");
+sbToggle.onclick = () => {
+  const open = document.body.classList.toggle("sb-open");
+  sbToggle.innerHTML = open ? "&#10005; Close" : "&#9776; Options";
 };
 document.addEventListener("keydown", ev => {
   if (ev.key === "Escape" && focus) setFocus(null);
