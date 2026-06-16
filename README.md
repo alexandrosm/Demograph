@@ -26,6 +26,9 @@ derived from that data, not asserted.
 - **Two width modes** — *share of world population* (100 %-stacked) or
   *absolute population* (the chart becomes a trumpet bell as humanity explodes
   after 1700).
+- **Two time axes** — *linear*, or *log time* (log of years-before-present),
+  which compresses the deep past and expands the recent centuries where most
+  of the detail lives.
 - **Color = civilization**, classified from each polity's religion + language
   fingerprint (Wikidata), with shades drifting along linguistic kinship and
   vertical gradients marking divergence (the USA fades out of British blue;
@@ -49,9 +52,9 @@ derived from that data, not asserted.
   population that surely lived under *some* unmapped local polity.
 - **Navigation minimap** — an editor-style thumbnail of the whole chart down
   the right edge, with a viewport indicator; click or drag to jump.
-- **World map** — a small map (bottom-left) that follows the hovered year,
-  painting each polity in its civilization's color: the histomap finally has
-  a map.
+- **World map** (optional, off by default) — a small map (bottom-left) that
+  follows the hovered year, painting each polity in its civilization's color:
+  the histomap finally has a map.
 - **Export** — download the current view (any palette, mode, or focus) as a
   print-ready **SVG** (vector, for true-size poster printing) or a 2× **PNG**.
 

@@ -51,7 +51,7 @@
   footer { text-align: center; font-size: 11.5px; color: var(--muted);
            padding: 12px 16px 28px; }
   footer a { color: inherit; }
-  #minimap { position: fixed; left: 14px; bottom: 14px; width: 232px;
+  #minimap { display: none; position: fixed; left: 14px; bottom: 14px; width: 232px;
              background: var(--bg); border: 1px solid var(--muted);
              border-radius: 4px; padding: 6px 6px 2px; z-index: 20;
              box-shadow: 0 2px 10px rgba(0,0,0,0.18); pointer-events: none;
@@ -97,7 +97,7 @@
   .sb-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px;
     color: var(--muted); margin-bottom: 6px; }
   #sidebar select { width: 100%; }
-  #sb-width .mode, #sidebar .ck { display: block; padding: 3px 0; }
+  #sb-width .mode, #sb-time .mode, #sidebar .ck { display: block; padding: 3px 0; }
   .sb-export .mode { display: inline-block; padding: 2px 8px 2px 0; }
 </style>
 </head>
@@ -112,6 +112,11 @@
     <span id="mode-share" class="mode active">share of world</span>
     <span id="mode-abs" class="mode">absolute population</span>
   </div>
+  <div class="sb-group" id="sb-time">
+    <div class="sb-label">Time axis</div>
+    <span id="time-linear" class="mode active">linear</span>
+    <span id="time-log" class="mode">log &mdash; expand recent past</span>
+  </div>
   <div class="sb-group">
     <div class="sb-label">Palette</div>
     <select id="scheme"></select>
@@ -120,6 +125,7 @@
     <div class="sb-label">Layers</div>
     <label class="ck"><input type="checkbox" id="events-ck" checked> events</label>
     <label class="ck"><input type="checkbox" id="nogray"> hide stateless / unmapped</label>
+    <label class="ck"><input type="checkbox" id="worldmap-ck"> world map (bottom-left)</label>
   </div>
   <div class="sb-group sb-export">
     <div class="sb-label">Export</div>
@@ -376,7 +382,22 @@ function buildPatterns() {
   }
 }
 
-const yScale = d3.scaleLinear().domain(d3.extent(years)).range([M.top, H - M.bottom]);
+// Y axis: linear in years, or "log time" — log of years-before-present, so
+// the deep past compresses and recent centuries expand toward the bottom.
+let timeMode = "linear";
+const yTop = M.top, yBot = H - M.bottom;
+const yearMin = d3.min(years), yearMax = d3.max(years);
+const LMAX = Math.log(yearMax - yearMin + 1);
+function yScale(year) {
+  if (timeMode === "log")
+    return yBot - Math.log(yearMax - year + 1) / LMAX * (yBot - yTop);
+  return yTop + (year - yearMin) / (yearMax - yearMin) * (yBot - yTop);
+}
+yScale.invert = function (py) {
+  if (timeMode === "log")
+    return yearMax + 1 - Math.exp((yBot - py) / (yBot - yTop) * LMAX);
+  return yearMin + (py - yTop) / (yBot - yTop) * (yearMax - yearMin);
+};
 const xScale = d3.scaleLinear().range([M.left, W - M.right]);
 
 // Lineage gradients (USA off Britain, Byzantium off Rome, Ottomans off the
@@ -421,26 +442,11 @@ function styleFor(bg) {
     : { fill: dark ? "#f2ead8" : "#ffffff", halo: "rgba(0,0,0,0.45)" };
 }
 
-// Static furniture.
-const ticks = years.filter(y => y % 500 === 0 || y === years[0]);
-svg.selectAll(".year-line").data(ticks).join("line")
-  .attr("class", "year-line")
-  .attr("x1", M.left).attr("x2", W - M.right)
-  .attr("y1", d => yScale(d)).attr("y2", d => yScale(d));
-svg.selectAll(".year-tick-l").data(ticks).join("text")
-  .attr("class", "year-tick")
-  .attr("x", 8).attr("y", d => yScale(d) + 3)
-  .text(d => d < 0 ? `${-d} BCE` : d === 0 ? "1 CE" : `${d} CE`);
+// Static furniture (re-laid out by drawFurniture when the time axis changes).
 const fmtWorld = p => d3.format(".3s")(p).replace("G", "B");
 svg.append("text").attr("class", "year-tick")
   .attr("x", W - M.right + 8).attr("y", M.top - 10)
   .text("world pop.");
-svg.selectAll(".pop-tick").data(ticks).join("text")
-  .attr("class", "year-tick pop-tick")
-  .attr("x", W - M.right + 8).attr("y", d => yScale(d) + 3)
-  .text(d => fmtWorld(worldAt(years.indexOf(d))));
-
-// Era bands down the left margin, like the original's period labels.
 const ERA_BANDS = [
   ["BRONZE AGE", -2000, -1200], ["IRON AGE", -1200, -550],
   ["CLASSICAL ANTIQUITY", -550, 300], ["LATE ANTIQUITY", 300, 600],
@@ -449,15 +455,37 @@ const ERA_BANDS = [
   ["INDUSTRIAL AGE", 1789, 1914], ["MODERN AGE", 1914, 2015],
 ];
 const eraG = svg.append("g");
-for (const [name, a, b] of ERA_BANDS) {
-  eraG.append("text").attr("class", "era-label")
-    .attr("transform",
-          `translate(68,${(yScale(a) + yScale(b)) / 2}) rotate(-90)`)
-    .text(name);
-  eraG.append("line").attr("class", "year-line")
-    .attr("x1", 58).attr("x2", 78)
-    .attr("y1", yScale(a)).attr("y2", yScale(a));
+const gridG = svg.append("g");
+const TICKS_LINEAR = years.filter(y => y % 500 === 0 || y === years[0]);
+const TICKS_LOG = [-2000, -1000, -500, 0, 500, 1000, 1500, 1800, 1900, 1950, 2000, 2015]
+  .filter(y => years.includes(y));
+function drawFurniture() {
+  const ticks = timeMode === "log" ? TICKS_LOG : TICKS_LINEAR;
+  gridG.selectAll(".year-line").data(ticks).join("line")
+    .attr("class", "year-line").attr("x1", M.left).attr("x2", W - M.right)
+    .attr("y1", d => yScale(d)).attr("y2", d => yScale(d));
+  gridG.selectAll(".year-tick-l").data(ticks).join("text")
+    .attr("class", "year-tick year-tick-l").attr("x", 8).attr("y", d => yScale(d) + 3)
+    .text(d => d < 0 ? `${-d} BCE` : d === 0 ? "1 CE" : `${d} CE`);
+  gridG.selectAll(".pop-tick").data(ticks).join("text")
+    .attr("class", "year-tick pop-tick").attr("x", W - M.right + 8)
+    .attr("y", d => yScale(d) + 3)
+    .text(d => fmtWorld(worldAt(years.indexOf(d))));
+  eraG.selectAll("*").remove();
+  for (const [name, a, b] of ERA_BANDS) {
+    eraG.append("text").attr("class", "era-label")
+      .attr("transform", `translate(68,${(yScale(a) + yScale(b)) / 2}) rotate(-90)`)
+      .text(name);
+    eraG.append("line").attr("class", "year-line")
+      .attr("x1", 58).attr("x2", 78).attr("y1", yScale(a)).attr("y2", yScale(a));
+  }
+  for (const ld of lineageDefs) {  // gradient geometry follows the y axis
+    const first = D.series[ld.child].find(d => d.share > 0);
+    if (first) defs.select("#" + ld.id)
+      .attr("y1", yScale(first.year)).attr("y2", yScale(first.year + GRAD_SPAN));
+  }
 }
+drawFurniture();
 
 const tip = document.getElementById("tip");
 const fmtPct = d3.format(".1%"), fmtPop = d3.format(",.3r");
@@ -468,6 +496,7 @@ const streamG = svg.append("g"), sepG = svg.append("g"),
 let mode = "share";
 let hideGray = false;
 let showEvents = true;
+let showWorldMap = false;  // geographic world map (bottom-left) — default off
 let focus = null;  // null | {type:'civ', key} | {type:'region', key, anchor}
 let mmLandG = null, mmPolG = null, mmYear = null;  // minimap state (hoisted)
 const navEl = document.getElementById("navmap");      // navmap refs (hoisted:
@@ -955,7 +984,7 @@ function initMinimap() {
   mmPolG = mmSvg.append("g");
 }
 function updateMinimap(year, hi) {
-  if (!mm || !mmPolG) return;
+  if (!mm || !mmPolG || !showWorldMap) return;
   mmYear = year;
   const feats = mm.frames[String(year)] || [];
   const sel = mmPolG.selectAll("path").data(feats, d => d.n);
@@ -1021,6 +1050,26 @@ function setMode(m) {
 }
 document.getElementById("mode-share").onclick = () => setMode("share");
 document.getElementById("mode-abs").onclick = () => setMode("abs");
+function setTimeMode(m) {
+  if (m === timeMode) return;
+  timeMode = m;
+  document.getElementById("time-linear").classList.toggle("active", m === "linear");
+  document.getElementById("time-log").classList.toggle("active", m === "log");
+  drawFurniture();
+  render(true);
+}
+document.getElementById("time-linear").onclick = () => setTimeMode("linear");
+document.getElementById("time-log").onclick = () => setTimeMode("log");
+function applyWorldMap() {
+  document.getElementById("minimap").style.display =
+    (showWorldMap && mm) ? "block" : "none";
+}
+document.getElementById("worldmap-ck").onchange = e => {
+  showWorldMap = e.target.checked;
+  applyWorldMap();
+  if (showWorldMap) updateMinimap(mmYear ?? 1500, null);
+};
+applyWorldMap();
 {
   const sel = document.getElementById("scheme");
   for (const [k, sc] of Object.entries(SCHEMES)) {
