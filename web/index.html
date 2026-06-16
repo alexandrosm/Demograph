@@ -4,8 +4,8 @@
 <meta charset="utf-8" />
 <title>Demograph — population under each polity</title>
 <style>
-  :root { --bg: #f5f0e6; --ink: #2b2620; --muted: #6b6353; --outline: #1a1611;
-          --grid: rgba(0,0,0,0.07); }
+  :root { --bg: #ead9bd; --ink: #3d2f1f; --muted: #79633f; --outline: #2e2113;
+          --grid: rgba(61,47,31,0.10); --gray: #cbbfa8; }
   body { margin: 0; background: var(--bg); color: var(--ink);
          font-family: Georgia, "Times New Roman", serif;
          transition: background 0.6s; }
@@ -13,14 +13,9 @@
   header h1 { margin: 0; font-size: 27px; letter-spacing: 4px; }
   header p { margin: 6px auto 0; font-size: 13px; line-height: 1.5;
              color: var(--muted); max-width: 760px; }
-  .modes { font-size: 13px; color: var(--muted); }
-  .mode { cursor: pointer; text-decoration: underline dotted; color: var(--muted); }
-  .mode.active { font-weight: bold; color: var(--ink); text-decoration: none; }
   select { font: 12.5px "Segoe UI", system-ui, sans-serif; background: var(--bg);
-           color: var(--ink); border: 1px solid var(--muted); border-radius: 3px;
-           padding: 1px 4px; }
-  label.ck { font: 12.5px "Segoe UI", system-ui, sans-serif; color: var(--muted);
-             cursor: pointer; }
+           color: var(--ink); border: 1px solid var(--muted); border-radius: 5px;
+           padding: 5px 6px; }
   #chart { display: block; margin: 0 auto; }
   .stream { stroke: var(--outline); stroke-width: var(--sw, 0.6); cursor: pointer; }
   .stream:hover { filter: brightness(1.08); }
@@ -89,59 +84,113 @@
     transform: translateX(-100%); transition: transform .25s ease;
     font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif; }
   body.sb-open #sidebar { transform: translateX(0); }
-  #sidebar .sb-title { font-family: Georgia, serif; font-size: 18px;
-    letter-spacing: 2px; margin: 0 0 4px; color: var(--ink); }
-  #sidebar .sb-sub { font-size: 11.5px; line-height: 1.45; color: var(--muted);
-    margin: 0 0 6px; }
-  .sb-group { border-top: 1px solid var(--grid); padding: 11px 0 3px; }
-  .sb-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px;
-    color: var(--muted); margin-bottom: 6px; }
+  #sidebar .sb-title { font-family: Georgia, serif; font-size: 19px;
+    letter-spacing: 3px; margin: 0 0 5px; color: var(--ink); }
+  #sidebar .sb-sub { font-size: 11.5px; line-height: 1.5; color: var(--muted);
+    margin: 0 0 4px; }
+  .sb-sec { border-top: 1px solid var(--grid); margin-top: 13px; padding-top: 12px; }
+  .sb-label { font: 600 10px "Segoe UI", system-ui, sans-serif;
+    text-transform: uppercase; letter-spacing: 1.6px; color: var(--muted);
+    margin-bottom: 7px; }
+  .sb-note { font-size: 10.5px; line-height: 1.4; color: var(--muted); margin-top: 6px; }
   #sidebar select { width: 100%; }
-  #sb-width .mode, #sb-time .mode, #sidebar .ck { display: block; padding: 3px 0; }
-  .sb-export .mode { display: inline-block; padding: 2px 8px 2px 0; }
+  .seg { display: flex; border: 1px solid var(--muted); border-radius: 5px;
+    overflow: hidden; }
+  .seg .opt { flex: 1; text-align: center; padding: 6px 4px; cursor: pointer;
+    font-size: 11.5px; color: var(--muted); user-select: none; white-space: nowrap;
+    transition: background .12s, color .12s; }
+  .seg .opt:hover { background: var(--grid); }
+  .seg .opt.active { background: var(--ink); color: var(--bg); font-weight: 600; }
+  .seg .opt + .opt { border-left: 1px solid var(--muted); }
+  .ck { display: flex; align-items: center; gap: 8px; font-size: 12.5px;
+    color: var(--ink); cursor: pointer; padding: 4px 0; }
+  .ck input { accent-color: var(--ink); margin: 0; }
+  .sb-btns { display: flex; gap: 8px; }
+  .sb-btn { flex: 1; text-align: center; padding: 7px; border: 1px solid var(--muted);
+    border-radius: 5px; cursor: pointer; font-size: 12px; color: var(--ink);
+    background: transparent; transition: background .12s; }
+  .sb-btn:hover { background: var(--grid); }
+  .sb-legend { font-size: 11.5px; line-height: 1.5; color: var(--muted); }
+  .sb-legend .key { display: flex; align-items: center; gap: 8px; margin-bottom: 5px;
+    color: var(--ink); }
+  .sb-legend .sw { width: 14px; height: 14px; border-radius: 3px; flex: none;
+    border: 1px solid var(--muted); }
+  .sw-civ { background: linear-gradient(90deg,#b94a3f,#cf9a37,#5f8a48,#4373c4,#8a63cf);
+    border-color: transparent; }
+  .sw-hatch { background-color: var(--gray);
+    background-image: repeating-linear-gradient(45deg, var(--muted) 0 1px, transparent 1px 4px); }
+  .sw-gray { background: var(--gray); }
+  .sb-legend .hint { margin-top: 9px; line-height: 1.65; }
+  .sb-legend kbd { font: 10px ui-monospace, monospace; border: 1px solid var(--muted);
+    border-radius: 3px; padding: 0 4px; color: var(--ink); }
 </style>
 </head>
 <body>
 <button id="sidebar-toggle">&#9776; Options</button>
 <aside id="sidebar">
   <div class="sb-title">DEMOGRAPH</div>
-  <div class="sb-sub">Four thousand years of world population, after Sparks's
-  1931 <em>Histomap</em>.</div>
-  <div class="sb-group" id="sb-width">
-    <div class="sb-label">Width</div>
-    <span id="mode-share" class="mode active">share of world</span>
-    <span id="mode-abs" class="mode">absolute population</span>
+  <div class="sb-sub">Four thousand years of world population &mdash; a
+  data-driven remake of Sparks's 1931 <em>Histomap</em>.</div>
+
+  <div class="sb-sec">
+    <div class="sb-label">Stream width</div>
+    <div class="seg" id="sb-width">
+      <div class="opt active" id="mode-share">Share</div>
+      <div class="opt" id="mode-abs">Absolute</div>
+    </div>
+    <div class="sb-note">Share of the world, or absolute population.</div>
   </div>
-  <div class="sb-group" id="sb-time">
+
+  <div class="sb-sec">
     <div class="sb-label">Time axis</div>
-    <span id="time-linear" class="mode active">linear</span>
-    <span id="time-log" class="mode">expand recent past</span>
+    <div class="seg" id="sb-time">
+      <div class="opt active" id="time-linear">Linear</div>
+      <div class="opt" id="time-log">Compressed</div>
+    </div>
+    <div class="sb-note">Compressed shrinks the deep past and expands recent centuries.</div>
   </div>
-  <div class="sb-group">
+
+  <div class="sb-sec">
     <div class="sb-label">Palette</div>
     <select id="scheme"></select>
   </div>
-  <div class="sb-group">
+
+  <div class="sb-sec">
     <div class="sb-label">Layers</div>
-    <label class="ck"><input type="checkbox" id="events-ck" checked> events</label>
-    <label class="ck"><input type="checkbox" id="nogray"> hide stateless / unmapped</label>
-    <label class="ck"><input type="checkbox" id="worldmap-ck"> world map (bottom-left)</label>
+    <label class="ck"><input type="checkbox" id="events-ck" checked> Event annotations</label>
+    <label class="ck"><input type="checkbox" id="navmap-ck" checked> Navigation minimap</label>
+    <label class="ck"><input type="checkbox" id="worldmap-ck"> World map</label>
+    <label class="ck"><input type="checkbox" id="nogray"> Hide stateless / unmapped</label>
   </div>
-  <div class="sb-group sb-export">
+
+  <div class="sb-sec">
     <div class="sb-label">Export</div>
-    <span id="export-svg" class="mode">SVG</span>
-    <span id="export-png" class="mode">PNG</span>
+    <div class="sb-btns">
+      <div class="sb-btn" id="export-svg">SVG</div>
+      <div class="sb-btn" id="export-png">PNG</div>
+    </div>
+    <div class="sb-note">SVG is vector &mdash; best for poster printing.</div>
+  </div>
+
+  <div class="sb-sec">
+    <div class="sb-label">Reading it</div>
+    <div class="sb-legend">
+      <div class="key"><span class="sw sw-civ"></span> Hue = civilization</div>
+      <div class="key"><span class="sw sw-hatch"></span> Unrecorded local states</div>
+      <div class="key"><span class="sw sw-gray"></span> Stateless / unmapped</div>
+      <div class="hint">
+        <b>Click</b> a stream &rarr; focus its region<br>
+        <b>Shift-click</b> &rarr; focus its civilization<br>
+        <kbd>Esc</kbd> or click again &rarr; back<br>
+        Drag the right-edge minimap to scroll
+      </div>
+    </div>
   </div>
 </aside>
 <header>
   <h1>HISTOMAP&nbsp;2</h1>
-  <p>Four thousand years of world history &mdash; <strong>population living under
-  each polity</strong>, 2000&nbsp;BCE&ndash;2015&nbsp;CE.
-  Hue = civilization; shades drift with linguistic kinship; gradients mark
-  divergence from a parent civilization; hatched bands are unrecorded local
-  states; gray is population outside any state.
-  <em>Click a stream to focus its region; Shift-click focuses its civilization;
-  Esc returns. Controls in the &#9776; Options panel, top-left.</em></p>
+  <p>Four thousand years of world history &mdash; population living under each
+  polity, 2000&nbsp;BCE&ndash;2015&nbsp;CE.</p>
 </header>
 <svg id="chart"></svg>
 <div id="navmap">
@@ -204,7 +253,7 @@ const PASTEL_ANCHORS = Object.fromEntries(Object.entries(FAMILY_HUE)
   .map(([f, h]) => [f, d3.hsl(h, 0.50, 0.72).formatHex()]));
 const SCHEMES = {
   civ: {
-    label: "Civilizational (default)", kind: "formula",
+    label: "Civilizational", kind: "formula",
     css: { bg: "#f5f0e6", ink: "#2b2620", muted: "#6b6353",
            outline: "#1a1611", grid: "rgba(0,0,0,0.07)", gray: "#c9c2b4" },
   },
@@ -251,7 +300,7 @@ const SCHEMES = {
            grid: "rgba(255,248,230,0.08)", gray: "#3c372f", sw: "1.6" },
   },
   strata: {
-    label: "Geologic strata", kind: "anchor", rampL: 0.08, rampH: 6,
+    label: "Geologic strata (default)", kind: "anchor", rampL: 0.08, rampH: 6,
     anchors: { americas: "#7d8471", classical: "#8c8270", westeurope: "#5e6e75",
                africa: "#a3874f", orthodox: "#7a6678", ancientne: "#8a5a33",
                islam: "#b3893f", steppe: "#8f7f8f", dharmic: "#7e8a4f",
@@ -301,7 +350,7 @@ const ageT = y => {
 };
 const ageColorOf = y => d3.color(
   d3.interpolatePlasma(0.08 + 0.84 * ageT(y))).formatHex();
-let schemeKey = "civ";
+let schemeKey = "strata";
 const S = () => SCHEMES[schemeKey];
 
 function familyColor(fam, t, isBundle) {
@@ -985,6 +1034,7 @@ function applyScheme() {
   root.setProperty("--muted", css.muted);
   root.setProperty("--outline", css.outline);
   root.setProperty("--grid", css.grid);
+  root.setProperty("--gray", css.gray);
   root.setProperty("--sw", css.sw || "0.6");
   buildColors();
   buildPatterns();
@@ -1107,8 +1157,12 @@ applyWorldMap();
     o.value = k; o.textContent = sc.label;
     sel.appendChild(o);
   }
+  sel.value = schemeKey;
   sel.onchange = () => { schemeKey = sel.value; applyScheme(); render(false); };
 }
+document.getElementById("navmap-ck").onchange = e => {
+  document.getElementById("navmap").style.display = e.target.checked ? "" : "none";
+};
 document.getElementById("nogray").onchange = ev => {
   hideGray = ev.target.checked;
   render(true);
