@@ -151,6 +151,15 @@
   </div>
 
   <div class="sb-sec">
+    <div class="sb-label">Stateless / unmapped</div>
+    <div class="seg" id="sb-gray">
+      <div class="opt active" id="gray-show">Shown</div>
+      <div class="opt" id="gray-hide">Hidden</div>
+    </div>
+    <div class="sb-note">Hidden renormalizes widths to governed population &mdash; Sparks's implicit view.</div>
+  </div>
+
+  <div class="sb-sec">
     <div class="sb-label">Palette</div>
     <select id="scheme"></select>
   </div>
@@ -160,7 +169,6 @@
     <label class="ck"><input type="checkbox" id="events-ck" checked> Event annotations</label>
     <label class="ck"><input type="checkbox" id="navmap-ck" checked> Navigation minimap</label>
     <label class="ck"><input type="checkbox" id="worldmap-ck"> World map</label>
-    <label class="ck"><input type="checkbox" id="nogray"> Hide stateless / unmapped</label>
   </div>
 
   <div class="sb-sec">
@@ -1163,10 +1171,15 @@ applyWorldMap();
 document.getElementById("navmap-ck").onchange = e => {
   document.getElementById("navmap").style.display = e.target.checked ? "" : "none";
 };
-document.getElementById("nogray").onchange = ev => {
-  hideGray = ev.target.checked;
+function setGray(showIt) {
+  if (hideGray === !showIt) return;
+  hideGray = !showIt;
+  document.getElementById("gray-show").classList.toggle("active", showIt);
+  document.getElementById("gray-hide").classList.toggle("active", !showIt);
   render(true);
-};
+}
+document.getElementById("gray-show").onclick = () => setGray(true);
+document.getElementById("gray-hide").onclick = () => setGray(false);
 document.getElementById("events-ck").onchange = ev => {
   showEvents = ev.target.checked;
   render(false);

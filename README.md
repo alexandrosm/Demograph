@@ -138,11 +138,14 @@ occupation of Japan.
 
 ## Data & licensing
 
-Source **code** is MIT. **Derived data** and the curated **event annotations**
-are CC BY 4.0, because the data is computed from CC BY upstream sources
-(Cliopatria, HYDE) plus public-domain / CC0 sources (Natural Earth, Wikidata).
-Full attribution in [`NOTICE`](NOTICE) and [`LICENSE`](LICENSE). The 1931
-original is homage, not reproduced here.
+Everything this project created — code, the visualization, the curated event
+annotations, and the derived datasets — is dedicated to the public domain under
+**[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)**, the most
+permissive Creative Commons option: copy, modify, and reuse freely, including
+commercially, no permission or attribution required. The derived data is
+computed from upstream sources, some CC BY (Cliopatria, HYDE) — CC0 covers our
+additions, but please still credit those upstream sources when you reuse the
+data (see [`NOTICE`](NOTICE)). The 1931 original is homage, not reproduced here.
 
 ## Limitations & data-quality notes
 

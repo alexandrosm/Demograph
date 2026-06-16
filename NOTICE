@@ -1,9 +1,12 @@
-histomap2 — data sources and attribution
+Demograph — data sources and attribution
 =========================================
 
-This project's derived datasets are computed from the following upstream
-sources. If you reuse the derived data (data/processed/*.csv, web/data.js,
-web/regions.js), please attribute these:
+This project's own work (code, visualization, curated events, derived data)
+is released into the public domain under CC0 1.0 (see LICENSE). The derived
+datasets are computed from the upstream sources below. CC0 covers our
+additions, but the upstream CC BY sources still ask to be attributed when you
+reuse the derived data (data/processed/*.csv, web/data.js, web/regions.js) —
+please credit:
 
 Cliopatria — historical polity boundary polygons, 3400 BCE–2024 CE
   Seshat Global History Databank
