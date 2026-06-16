@@ -26,9 +26,9 @@ derived from that data, not asserted.
 - **Two width modes** — *share of world population* (100 %-stacked) or
   *absolute population* (the chart becomes a trumpet bell as humanity explodes
   after 1700).
-- **Two time axes** — *linear*, or *log time* (log of years-before-present),
-  which compresses the deep past and expands the recent centuries where most
-  of the detail lives.
+- **Two time axes** — *linear*, or *expand recent past* (years-before-present
+  on a gentle power scale), which compresses the deep past and expands the
+  recent centuries where most of the detail lives.
 - **Color = civilization**, classified from each polity's religion + language
   fingerprint (Wikidata), with shades drifting along linguistic kinship and
   vertical gradients marking divergence (the USA fades out of British blue;

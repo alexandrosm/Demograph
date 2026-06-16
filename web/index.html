@@ -115,7 +115,7 @@
   <div class="sb-group" id="sb-time">
     <div class="sb-label">Time axis</div>
     <span id="time-linear" class="mode active">linear</span>
-    <span id="time-log" class="mode">log &mdash; expand recent past</span>
+    <span id="time-log" class="mode">expand recent past</span>
   </div>
   <div class="sb-group">
     <div class="sb-label">Palette</div>
@@ -382,20 +382,27 @@ function buildPatterns() {
   }
 }
 
-// Y axis: linear in years, or "log time" — log of years-before-present, so
-// the deep past compresses and recent centuries expand toward the bottom.
+// Y axis: linear in years, or "compressed" — years-before-present raised to
+// TIME_EXP (0<exp<1), so the deep past compresses and recent centuries expand.
+// exp=1 is linear; exp->0 approaches a (too-aggressive) log. 0.5 (square root)
+// is a gentle middle.
 let timeMode = "linear";
 const yTop = M.top, yBot = H - M.bottom;
 const yearMin = d3.min(years), yearMax = d3.max(years);
-const LMAX = Math.log(yearMax - yearMin + 1);
+const TIME_EXP = 0.5;
+const FMAX = Math.pow(yearMax - yearMin + 1, TIME_EXP);
 function yScale(year) {
-  if (timeMode === "log")
-    return yBot - Math.log(yearMax - year + 1) / LMAX * (yBot - yTop);
+  if (timeMode === "log") {
+    const f = Math.pow(yearMax - year + 1, TIME_EXP);
+    return yBot - (f - 1) / (FMAX - 1) * (yBot - yTop);
+  }
   return yTop + (year - yearMin) / (yearMax - yearMin) * (yBot - yTop);
 }
 yScale.invert = function (py) {
-  if (timeMode === "log")
-    return yearMax + 1 - Math.exp((yBot - py) / (yBot - yTop) * LMAX);
+  if (timeMode === "log") {
+    const f = 1 + (yBot - py) / (yBot - yTop) * (FMAX - 1);
+    return yearMax + 1 - Math.pow(f, 1 / TIME_EXP);
+  }
   return yearMin + (py - yTop) / (yBot - yTop) * (yearMax - yearMin);
 };
 const xScale = d3.scaleLinear().range([M.left, W - M.right]);
