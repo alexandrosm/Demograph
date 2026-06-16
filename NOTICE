@@ -1,0 +1,29 @@
+histomap2 — data sources and attribution
+=========================================
+
+This project's derived datasets are computed from the following upstream
+sources. If you reuse the derived data (data/processed/*.csv, web/data.js,
+web/regions.js), please attribute these:
+
+Cliopatria — historical polity boundary polygons, 3400 BCE–2024 CE
+  Seshat Global History Databank
+  https://github.com/Seshat-Global-History-Databank/cliopatria
+  License: CC BY 4.0
+
+HYDE 3.2.1 — History Database of the Global Environment (gridded population)
+  Klein Goldewijk, K., A. Beusen, J. Doelman and E. Stehfest (2017)
+  DOI: 10.17026/dans-25g-gez3
+  License: the DANS deposit is CC0; the release readme states CC BY 3.0.
+  (HYDE 3.3+ switched to CC BY-NC-SA — this project deliberately uses 3.2.1.)
+
+Natural Earth — admin-0 country polygons (region boundaries)
+  https://www.naturalearthdata.com
+  Public domain.
+
+Wikidata — religion (P140) and language (P37/P2936) claims per polity
+  https://www.wikidata.org
+  License: CC0.
+
+Inspiration / homage (not reproduced here):
+  John B. Sparks, "The Histomap: Four Thousand Years of World History"
+  Histomap, Inc. / Rand McNally, 1931.

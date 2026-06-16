@@ -1,0 +1,14 @@
+# Pipeline dependencies (the web app itself is static and needs none of these).
+# Verified with Python 3.11.
+numpy>=2.0
+pandas>=2.0
+shapely>=2.0
+rasterio>=1.4
+geopandas>=1.0
+pyogrio>=0.7
+requests>=2.31
+remotezip>=0.12          # range-request extraction of HYDE grids
+zipfile-deflate64>=0.2   # HYDE archive uses Deflate64
+
+# Dev only (screenshots / headless render checks):
+# playwright>=1.40

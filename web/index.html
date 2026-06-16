@@ -1,0 +1,890 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>histomap2 — population under each polity</title>
+<style>
+  :root { --bg: #f5f0e6; --ink: #2b2620; --muted: #6b6353; --outline: #1a1611;
+          --grid: rgba(0,0,0,0.07); }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font-family: Georgia, "Times New Roman", serif;
+         transition: background 0.6s; }
+  header { text-align: center; padding: 24px 16px 4px; }
+  header h1 { margin: 0; font-size: 27px; letter-spacing: 4px; }
+  header p { margin: 6px auto 0; font-size: 13px; line-height: 1.5;
+             color: var(--muted); max-width: 760px; }
+  .modes { font-size: 13px; color: var(--muted); }
+  .mode { cursor: pointer; text-decoration: underline dotted; color: var(--muted); }
+  .mode.active { font-weight: bold; color: var(--ink); text-decoration: none; }
+  select { font: 12.5px "Segoe UI", system-ui, sans-serif; background: var(--bg);
+           color: var(--ink); border: 1px solid var(--muted); border-radius: 3px;
+           padding: 1px 4px; }
+  label.ck { font: 12.5px "Segoe UI", system-ui, sans-serif; color: var(--muted);
+             cursor: pointer; }
+  #chart { display: block; margin: 0 auto; }
+  .stream { stroke: var(--outline); stroke-width: var(--sw, 0.6); cursor: pointer; }
+  .stream:hover { filter: brightness(1.08); }
+  .sep { fill: none; stroke: #fff; stroke-width: 0.3; pointer-events: none; }
+  .stream-label, .focus-title {
+    font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+    paint-order: stroke; pointer-events: none; text-anchor: middle;
+    text-rendering: optimizeLegibility; }
+  .focus-title { font-size: 13px; font-weight: 600; letter-spacing: 2px;
+                 fill: var(--ink); stroke: var(--bg); stroke-width: 3px; }
+  .year-tick { font: 11px "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+               fill: var(--muted); font-variant-numeric: tabular-nums; }
+  .event-label { font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+                 letter-spacing: 0.2px; paint-order: stroke;
+                 pointer-events: none; text-anchor: middle; }
+  .era-label { font: 10px "Segoe UI", system-ui, sans-serif; fill: var(--muted);
+               letter-spacing: 3px; text-anchor: middle; }
+  .event-banner { font: 600 13px "Segoe UI", system-ui, sans-serif;
+                  letter-spacing: 3px; fill: var(--ink); stroke: var(--bg);
+                  stroke-width: 3px; paint-order: stroke; text-anchor: middle;
+                  pointer-events: none; }
+  .year-line { stroke: var(--grid); }
+  #tip { position: fixed; pointer-events: none; background: #241f18; color: #f5f0e6;
+         padding: 7px 11px; border-radius: 3px; display: none; max-width: 280px;
+         font: 12.5px/1.45 "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+         box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+  #tip .fam { color: #b3a888; font-size: 11.5px; }
+  footer { text-align: center; font-size: 11.5px; color: var(--muted);
+           padding: 12px 16px 28px; }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<header>
+  <h1>HISTOMAP&nbsp;2</h1>
+  <p>Four thousand years of world history &mdash; <strong>population living under
+  each polity</strong>, 2000&nbsp;BCE&ndash;2015&nbsp;CE.
+  Hue = civilization; shades drift with linguistic kinship; gradients mark
+  divergence from a parent civilization; hatched bands are unrecorded local
+  states; gray is population outside any state.
+  <em>Click a stream to focus its region; Shift-click focuses its civilization;
+  Esc returns.</em></p>
+  <p class="modes">Width:
+    <span id="mode-share" class="mode active">share of world</span>
+    &middot;
+    <span id="mode-abs" class="mode">absolute population</span>
+    &nbsp;&nbsp;Palette: <select id="scheme"></select>
+    &nbsp;&nbsp;<label class="ck"><input type="checkbox" id="nogray">
+    hide stateless/unmapped</label>
+    &nbsp;&nbsp;<label class="ck"><input type="checkbox" id="events-ck" checked>
+    events</label></p>
+</header>
+<svg id="chart"></svg>
+<div id="tip"></div>
+<footer>
+  Data: <a href="https://doi.org/10.17026/dans-25g-gez3">HYDE 3.2.1</a> (Klein Goldewijk
+  et&nbsp;al., CC0/CC&nbsp;BY&nbsp;3.0) &middot;
+  <a href="https://github.com/Seshat-Global-History-Databank/cliopatria">Cliopatria</a>
+  (Seshat Global History Databank, CC&nbsp;BY&nbsp;4.0) &middot;
+  religion/language: <a href="https://www.wikidata.org">Wikidata</a> &middot;
+  regions: <a href="https://www.naturalearthdata.com">Natural Earth</a> &middot;
+  after John B. Sparks, <em>The Histomap</em> (1931)
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="data.js"></script>
+<script src="regions.js"></script>
+<script src="events.js"></script>
+<script>
+const D = HISTOMAP_DATA;
+const R = (typeof REGION_FOCUS !== "undefined") ? REGION_FOCUS : null;
+const W = 1000, H = Math.round(1000 * 158 / 31), M = { top: 24, right: 60, bottom: 24, left: 84 };
+
+const svg = d3.select("#chart").attr("width", W).attr("height", H);
+const defs = svg.append("defs");
+const years = D.years;
+
+const GRAY_L = "__statelessL", GRAY_R = "__statelessR";
+const polityKeys = D.order.filter(k => k !== D.residual);
+const displayName = k => (k === GRAY_L || k === GRAY_R) ? D.residual : k;
+const seriesFor = k => D.series[displayName(k)];
+
+const worldAt = i => D.order.reduce((s, k) => s + (D.series[k][i].pop || 0), 0);
+const maxWorld = d3.max(years.map((_, i) => worldAt(i)));
+
+const FAMILY_HUE = {
+  americas: 178, classical: 199, westeurope: 220, africa: 75, orthodox: 258,
+  ancientne: 18, islam: 38, steppe: 282, dharmic: 130, sinic: 358,
+  japan: 335,
+};
+const FAMILY_LABEL = {
+  americas: "Pre-Columbian Americas", classical: "Classical Mediterranean",
+  westeurope: "Western (Latin Christendom)",
+  africa: "African", orthodox: "Orthodox-Slavic",
+  ancientne: "Ancient Near East", islam: "Islamic world", steppe: "Steppe nomadic",
+  dharmic: "Indic (Dharmic)", sinic: "Sinic (East Asia)", japan: "Japanese",
+};
+
+// ---- color schemes -------------------------------------------------------
+// Each scheme keeps the SEMANTICS (family identity, kinship ramps, lineage
+// gradients, hatched unrecorded bands) and changes only the rendering vibe.
+const PASTEL_ANCHORS = Object.fromEntries(Object.entries(FAMILY_HUE)
+  .map(([f, h]) => [f, d3.hsl(h, 0.50, 0.72).formatHex()]));
+const SCHEMES = {
+  civ: {
+    label: "Civilizational (default)", kind: "formula",
+    css: { bg: "#f5f0e6", ink: "#2b2620", muted: "#6b6353",
+           outline: "#1a1611", grid: "rgba(0,0,0,0.07)", gray: "#c9c2b4" },
+  },
+  print: {
+    label: "1931 print", kind: "anchor", rampL: 0.09, rampH: 8,
+    anchors: { americas: "#3e7a6e", classical: "#5b7d99", westeurope: "#2f5d8a",
+               africa: "#8a6d3b", orthodox: "#5e4a7d", ancientne: "#7a4a2e",
+               islam: "#a87f2f", steppe: "#6e5a86", dharmic: "#5a7a3e",
+               sinic: "#9e3a33", japan: "#b05a6a" },
+    css: { bg: "#f0e6cf", ink: "#33291c", muted: "#6e5f49",
+           outline: "#241c12", grid: "rgba(43,32,18,0.10)", gray: "#c5b89e" },
+  },
+  night: {
+    label: "Night atlas", kind: "anchor", rampL: 0.10, rampH: 12,
+    anchors: { americas: "#2fbfa4", classical: "#3fa3d6", westeurope: "#3f7fd6",
+               africa: "#b9a13e", orthodox: "#8f6fe0", ancientne: "#c2693a",
+               islam: "#e0a33f", steppe: "#a86fd6", dharmic: "#58c25e",
+               sinic: "#e0524a", japan: "#e06f9a" },
+    dark: true,
+    css: { bg: "#16120d", ink: "#ece4d4", muted: "#9a8f7b",
+           outline: "#050403", grid: "rgba(255,248,230,0.10)", gray: "#46413a" },
+  },
+  pastel: {
+    label: "Pastel atlas", kind: "anchor", rampL: 0.07, rampH: 14,
+    anchors: PASTEL_ANCHORS,
+    css: { bg: "#faf6ee", ink: "#4a4337", muted: "#8a8070",
+           outline: "#5a5347", grid: "rgba(0,0,0,0.06)", gray: "#dcd6c8" },
+  },
+  // ---- the adventurous ones ----
+  age: {
+    // Breaks the core rule: hue encodes WHEN the polity first appeared
+    // (thermal: Bronze Age indigo -> modern incandescent), not civilization.
+    label: "Age of empires", kind: "age",
+    hatchFix: { rect: "#d9cdb4", line: "#a08e6a" },
+    css: { bg: "#f3ede1", ink: "#2b2620", muted: "#6b6353",
+           outline: "#1a1611", grid: "rgba(0,0,0,0.07)", gray: "#cfc8ba" },
+  },
+  glass: {
+    label: "Stained glass", kind: "anchor", rampL: 0.08, rampH: 10, dark: true,
+    anchors: Object.fromEntries(Object.entries(FAMILY_HUE)
+      .map(([f, h]) => [f, d3.hsl(h, 0.85, 0.52).formatHex()])),
+    css: { bg: "#1b1815", ink: "#e8e0d0", muted: "#988f7e",
+           outline: "#000000",
+           grid: "rgba(255,248,230,0.08)", gray: "#3c372f", sw: "1.6" },
+  },
+  strata: {
+    label: "Geologic strata", kind: "anchor", rampL: 0.08, rampH: 6,
+    anchors: { americas: "#7d8471", classical: "#8c8270", westeurope: "#5e6e75",
+               africa: "#a3874f", orthodox: "#7a6678", ancientne: "#8a5a33",
+               islam: "#b3893f", steppe: "#8f7f8f", dharmic: "#7e8a4f",
+               sinic: "#9d5b45", japan: "#a87168" },
+    css: { bg: "#ead9bd", ink: "#3d2f1f", muted: "#79633f",
+           outline: "#2e2113", grid: "rgba(61,47,31,0.10)", gray: "#cbbfa8" },
+  },
+  cyan: {
+    // Monochrome cyanotype: one Prussian blue, families separated by
+    // lightness bands alone — an architectural blueprint of history.
+    label: "Cyanotype", kind: "anchor", rampL: 0.05, rampH: 0, dark: true,
+    anchors: Object.fromEntries(Object.entries({
+      americas: 0.74, classical: 0.62, westeurope: 0.46, africa: 0.68,
+      orthodox: 0.36, ancientne: 0.56, islam: 0.66, steppe: 0.30,
+      dharmic: 0.52, sinic: 0.26, japan: 0.76,
+    }).map(([f, l]) => [f, d3.hsl(212, 0.52, l).formatHex()])),
+    hatchFix: { rect: "#26425e", line: "#6f93b8" },
+    css: { bg: "#13293f", ink: "#dcebf7", muted: "#8fb0cc",
+           outline: "#cfe0ee", grid: "rgba(220,236,247,0.12)",
+           gray: "#2e4257", sw: "0.4" },
+  },
+  neon: {
+    label: "Vaporwave", kind: "anchor", rampL: 0.08, rampH: 10, dark: true,
+    anchors: { americas: "#00e5c7", classical: "#4dc8ff", westeurope: "#4d7bff",
+               africa: "#ffd24d", orthodox: "#b066ff", ancientne: "#ff8a4d",
+               islam: "#ffb84d", steppe: "#d04dff", dharmic: "#4dff88",
+               sinic: "#ff4d6a", japan: "#ff7ab8" },
+    css: { bg: "#190f2e", ink: "#f0e6ff", muted: "#b89ad6",
+           outline: "#0c0618", grid: "rgba(255,77,170,0.15)", gray: "#3a2f55" },
+  },
+};
+
+// Empirical CDF of stream first-appearance years -> even thermal spread.
+const firstYearOf = arrOrKey => {
+  const arr = typeof arrOrKey === "string"
+    ? D.series[arrOrKey].map(s => s.share) : arrOrKey;
+  const i = arr.findIndex(v => v > 0);
+  return i >= 0 ? years[i] : years[0];
+};
+const AGE_SORTED = (D.colorOrder || polityKeys)
+  .map(k => firstYearOf(k)).sort((a, b) => a - b);
+const ageT = y => {
+  let lo = 0, hi = AGE_SORTED.length;
+  while (lo < hi) { const m = (lo + hi) >> 1;
+    if (AGE_SORTED[m] <= y) lo = m + 1; else hi = m; }
+  return AGE_SORTED.length ? lo / AGE_SORTED.length : 0.5;
+};
+const ageColorOf = y => d3.color(
+  d3.interpolatePlasma(0.08 + 0.84 * ageT(y))).formatHex();
+let schemeKey = "civ";
+const S = () => SCHEMES[schemeKey];
+
+function familyColor(fam, t, isBundle) {
+  const sc = S();
+  if (sc.kind === "formula") {
+    const h = ((FAMILY_HUE[fam] ?? 40) + (t * 40 - 20) + 360) % 360;
+    return d3.hsl(h, isBundle ? 0.22 : 0.60, 0.42 + t * 0.24).formatHex();
+  }
+  if (sc.kind === "age") {  // family is irrelevant in this scheme
+    return d3.hsl(35, isBundle ? 0.15 : 0.3, 0.55 + t * 0.1).formatHex();
+  }
+  const base = d3.hsl(sc.anchors[fam] || "#888888");
+  const h = (base.h + (2 * t - 1) * sc.rampH + 360) % 360;
+  const l = Math.max(0.18, Math.min(0.86, base.l + (2 * t - 1) * sc.rampL));
+  const s = base.s * (isBundle ? 0.4 : 1);
+  return d3.hsl(h, s, l).formatHex();
+}
+function hatchColors(fam) {
+  if (S().hatchFix) return S().hatchFix;
+  const base = d3.hsl(S().kind === "formula"
+    ? d3.hsl(FAMILY_HUE[fam] ?? 40, 0.5, 0.5).formatHex()
+    : (S().anchors[fam] || "#888888"));
+  return S().dark
+    ? { rect: d3.hsl(base.h, base.s * 0.6, 0.24).formatHex(),
+        line: d3.hsl(base.h, base.s * 0.8, 0.45).formatHex() }
+    : { rect: d3.hsl(base.h, base.s * 0.55, 0.78).formatHex(),
+        line: d3.hsl(base.h, base.s * 0.85, 0.55).formatHex() };
+}
+const grayColor = () => S().css.gray;
+
+const BUNDLES = new Set(D.bundles);
+const colorKeys = D.colorOrder || polityKeys;
+const blocks = [];
+{
+  let cur = null;
+  for (const k of colorKeys) {
+    const fam = D.regions[k] || "ancientne";
+    if (!cur || cur.fam !== fam) { cur = { fam, keys: [] }; blocks.push(cur); }
+    cur.keys.push(k);
+  }
+}
+const colorOf = new Map();
+function buildColors() {
+  for (const b of blocks) {
+    const n = b.keys.length;
+    b.keys.forEach((k, i) => {
+      const t = n > 1 ? i / (n - 1) : 0.5;
+      colorOf.set(k, S().kind === "age"
+        ? ageColorOf(firstYearOf(k))
+        : familyColor(b.fam, t, BUNDLES.has(k)));
+    });
+  }
+}
+const color = k => (k === GRAY_L || k === GRAY_R) ? grayColor() : colorOf.get(k);
+
+function ensurePattern(fam) {
+  const id = "unrec-" + fam;
+  const hc = hatchColors(fam);
+  let p = defs.select("#" + id);
+  if (p.empty()) {
+    p = defs.append("pattern").attr("id", id)
+      .attr("width", 5).attr("height", 5)
+      .attr("patternUnits", "userSpaceOnUse")
+      .attr("patternTransform", "rotate(45)");
+    p.append("rect").attr("width", 5).attr("height", 5);
+    p.append("line").attr("x1", 0).attr("y1", 0).attr("x2", 0).attr("y2", 5)
+      .attr("stroke-width", 1.6);
+  }
+  p.select("rect").attr("fill", hc.rect);
+  p.select("line").attr("stroke", hc.line);
+  return `url(#${id})`;
+}
+const patternOf = new Map();
+function buildPatterns() {
+  for (const k of colorKeys) {
+    if ((D.subfamilies || {})[k] !== "unrecorded") continue;
+    patternOf.set(k, ensurePattern(D.regions[k]));
+  }
+}
+
+const yScale = d3.scaleLinear().domain(d3.extent(years)).range([M.top, H - M.bottom]);
+const xScale = d3.scaleLinear().range([M.left, W - M.right]);
+
+// Lineage gradients (USA off Britain, Byzantium off Rome, Ottomans off the
+// steppe) — stop colors refresh on scheme change.
+const GRAD_SPAN = 150;
+const fillOf = new Map();
+const lineageDefs = [];
+for (const [child, lin] of Object.entries(D.lineage || {})) {
+  const s = D.series[child];
+  if (!s) continue;
+  const first = s.find(d => d.share > 0);
+  if (!first) continue;
+  const id = "lin-" + child.replace(/[^a-zA-Z]+/g, "-");
+  const g = defs.append("linearGradient")
+    .attr("id", id).attr("gradientUnits", "userSpaceOnUse")
+    .attr("x1", 0).attr("x2", 0)
+    .attr("y1", yScale(first.year)).attr("y2", yScale(first.year + GRAD_SPAN));
+  g.append("stop").attr("offset", "0%");
+  g.append("stop").attr("offset", "100%");
+  lineageDefs.push({ id, child, parent: lin.parent, family: lin.family });
+  fillOf.set(child, `url(#${id})`);
+}
+function buildGradients() {
+  for (const ld of lineageDefs) {
+    const from = ld.parent ? color(ld.parent) : familyColor(ld.family, 0.5, false);
+    const g = defs.select("#" + ld.id);
+    g.select("stop:nth-child(1)").attr("stop-color", from);
+    g.select("stop:nth-child(2)").attr("stop-color", color(ld.child));
+  }
+}
+const fill = k => patternOf.get(k) || fillOf.get(k) || color(k);
+
+const baseColorOf = k => {
+  if (k === GRAY_L || k === GRAY_R) return grayColor();
+  if (patternOf.has(k)) return hatchColors(D.regions[k]).rect;
+  return colorOf.get(k) || "#888";
+};
+function styleFor(bg) {
+  const dark = S().dark;
+  return d3.lab(bg).l > 62
+    ? { fill: "#241f18", halo: "rgba(245,240,230,0.7)" }
+    : { fill: dark ? "#f2ead8" : "#ffffff", halo: "rgba(0,0,0,0.45)" };
+}
+
+// Static furniture.
+const ticks = years.filter(y => y % 500 === 0 || y === years[0]);
+svg.selectAll(".year-line").data(ticks).join("line")
+  .attr("class", "year-line")
+  .attr("x1", M.left).attr("x2", W - M.right)
+  .attr("y1", d => yScale(d)).attr("y2", d => yScale(d));
+svg.selectAll(".year-tick-l").data(ticks).join("text")
+  .attr("class", "year-tick")
+  .attr("x", 8).attr("y", d => yScale(d) + 3)
+  .text(d => d < 0 ? `${-d} BCE` : d === 0 ? "1 CE" : `${d} CE`);
+const fmtWorld = p => d3.format(".3s")(p).replace("G", "B");
+svg.append("text").attr("class", "year-tick")
+  .attr("x", W - M.right + 8).attr("y", M.top - 10)
+  .text("world pop.");
+svg.selectAll(".pop-tick").data(ticks).join("text")
+  .attr("class", "year-tick pop-tick")
+  .attr("x", W - M.right + 8).attr("y", d => yScale(d) + 3)
+  .text(d => fmtWorld(worldAt(years.indexOf(d))));
+
+// Era bands down the left margin, like the original's period labels.
+const ERA_BANDS = [
+  ["BRONZE AGE", -2000, -1200], ["IRON AGE", -1200, -550],
+  ["CLASSICAL ANTIQUITY", -550, 300], ["LATE ANTIQUITY", 300, 600],
+  ["EARLY MIDDLE AGES", 600, 1000], ["HIGH MIDDLE AGES", 1000, 1300],
+  ["LATE MIDDLE AGES", 1300, 1500], ["EARLY MODERN", 1500, 1789],
+  ["INDUSTRIAL AGE", 1789, 1914], ["MODERN AGE", 1914, 2015],
+];
+const eraG = svg.append("g");
+for (const [name, a, b] of ERA_BANDS) {
+  eraG.append("text").attr("class", "era-label")
+    .attr("transform",
+          `translate(68,${(yScale(a) + yScale(b)) / 2}) rotate(-90)`)
+    .text(name);
+  eraG.append("line").attr("class", "year-line")
+    .attr("x1", 58).attr("x2", 78)
+    .attr("y1", yScale(a)).attr("y2", yScale(a));
+}
+
+const tip = document.getElementById("tip");
+const fmtPct = d3.format(".1%"), fmtPop = d3.format(",.3r");
+const streamG = svg.append("g"), sepG = svg.append("g"),
+      eventG = svg.append("g"), labelG = svg.append("g");
+
+// ---- render state -------------------------------------------------------
+let mode = "share";
+let hideGray = false;
+let showEvents = true;
+let focus = null;  // null | {type:'civ', key} | {type:'region', key, anchor}
+
+const stackKeys = () => hideGray ? polityKeys : [GRAY_L, ...polityKeys, GRAY_R];
+
+function makeStacked() {
+  const keys = stackKeys();
+  const rows = years.map((y, i) => {
+    const r = { year: y };
+    for (const k of polityKeys) {
+      const s = D.series[k][i];
+      r[k] = mode === "share" ? s.share : s.pop;
+    }
+    if (!hideGray) {
+      const res = D.series[D.residual][i];
+      r[GRAY_L] = r[GRAY_R] = (mode === "share" ? res.share : res.pop) / 2;
+    }
+    return r;
+  });
+  const stack = d3.stack().keys(keys).offset(
+    mode === "share" ? d3.stackOffsetExpand : d3.stackOffsetSilhouette);
+  return stack(rows);
+}
+
+const COL_FRAC = 0.56, GAP = 16;
+
+function sideItems(stacked, keys, splitIdx, colX0, colX1) {
+  const byKey = new Map(stacked.map(l => [l.key, l]));
+  const before = keys.slice(0, splitIdx), after = keys.slice(splitIdx);
+  const maxRight = d3.max(before, k => d3.max(byKey.get(k), d => xScale(d[1])));
+  const minLeft = d3.min(after, k => d3.min(byKey.get(k), d => xScale(d[0])));
+  const shiftL = Math.min(0, (colX0 - GAP) - (maxRight ?? M.left));
+  const shiftR = Math.max(0, (colX1 + GAP) - (minLeft ?? (W - M.right)));
+  return [
+    ...before.map(k => ({ key: k, layer: byKey.get(k), xmap: v => xScale(v) + shiftL })),
+    ...after.map(k => ({ key: k, layer: byKey.get(k), xmap: v => xScale(v) + shiftR })),
+  ];
+}
+
+function columnLayers(lanes, totals, xCol) {
+  const cums = years.map(() => 0);
+  return lanes.map(lane => {
+    const layer = years.map((y, i) => {
+      const tot = totals[i];
+      const v = tot > 0 ? lane.arr[i] / tot : 0;
+      const pt = tot > 0 ? [cums[i], cums[i] + v] : [0.5, 0.5];
+      pt.data = { year: y };
+      cums[i] += v;
+      return pt;
+    });
+    return { key: "__col__" + lane.name, layer, xmap: xCol,
+             name: lane.name, raw: lane.raw, fillv: lane.fillv,
+             bgv: lane.bgv, rdata: lane.rdata };
+  });
+}
+
+function computeItems() {
+  const keys = stackKeys();
+  const stacked = makeStacked();
+  xScale.domain(mode === "share" ? [0, 1] : [-maxWorld / 2, maxWorld / 2]);
+  if (!focus) return stacked.map(l => ({ key: l.key, layer: l, xmap: v => xScale(v) }));
+
+  const innerW = W - M.left - M.right;
+  const colW = COL_FRAC * innerW;
+  const colX0 = (W - colW) / 2, colX1 = colX0 + colW;
+  const xCol = v => colX0 + v * colW;
+
+  if (focus.type === "civ") {
+    const famKeys = polityKeys.filter(k => D.regions[k] === focus.key);
+    const famTotals = years.map((_, i) =>
+      famKeys.reduce((s, k) => s + D.series[k][i].share, 0));
+    const lanes = famKeys.map(k => ({
+      name: k, arr: years.map((_, i) => D.series[k][i].share),
+      fillv: fill(k),
+      rdata: { name: k, arr: years.map((_, i) => D.series[k][i].share),
+               totals: famTotals, label: FAMILY_LABEL[focus.key] || focus.key,
+               isShare: true },
+    }));
+    const i0 = keys.indexOf(famKeys[0]);
+    return [
+      ...sideItems(stacked, keys, i0, colX0, colX1)
+        .filter(it => !famKeys.includes(it.key)),
+      ...columnLayers(lanes, famTotals, xCol),
+    ];
+  }
+
+  // region focus
+  const reg = R.regions[focus.key];
+  const partial = new Set(reg.partial || []);
+  const totals = hideGray
+    ? reg.total.map((t, i) => t - reg.stateless[i])
+    : reg.total;
+  const lanes = [];
+  for (const [name, arr] of Object.entries(reg.rulers)) {
+    let fv;
+    if (colorOf.has(name)) fv = fill(name);
+    else if (S().kind === "age") fv = ageColorOf(firstYearOf(arr));
+    else {
+      const fam = (R.families || {})[name];
+      fv = familyColor(fam || "ancientne",
+                       [0.3, 0.55, 0.8][lanes.length % 3], false);
+    }
+    const disp = partial.has(name)
+      ? `${name} (in ${reg.short || reg.label})` : name;
+    lanes.push({ name: disp, raw: name, arr, fillv: fv,
+                 rdata: { name: disp, arr, totals, label: reg.label } });
+  }
+  lanes.push({ name: "Other local states", arr: reg.other, fillv: "#a39a88",
+               rdata: { name: "Other local states", arr: reg.other,
+                        totals, label: reg.label } });
+  for (const [fam, arr] of Object.entries(reg.unrecorded)) {
+    const nm = "Unrecorded " + (FAMILY_LABEL[fam] || fam) + " states";
+    lanes.push({ name: nm, arr, fillv: ensurePattern(fam),
+                 bgv: hatchColors(fam).rect,
+                 rdata: { name: nm, arr, totals, label: reg.label } });
+  }
+  if (!hideGray) {
+    lanes.push({ name: D.residual, arr: reg.stateless, fillv: grayColor(),
+                 rdata: { name: D.residual, arr: reg.stateless,
+                          totals, label: reg.label } });
+  }
+  const splitIdx = Math.max(1, keys.indexOf(focus.anchor));
+  return [
+    ...sideItems(stacked, keys, splitIdx, colX0, colX1),
+    ...columnLayers(lanes, totals, xCol),
+  ];
+}
+
+function areaPath(item) {
+  return d3.area()
+    .y(d => yScale(d.data.year))
+    .x0(d => item.xmap(d[0]))
+    .x1(d => item.xmap(d[1]))
+    .curve(d3.curveMonotoneY)(item.layer);
+}
+function edgePath(item) {
+  return d3.line()
+    .x(d => item.xmap(d[0]))
+    .y(d => yScale(d.data.year))
+    .curve(d3.curveMonotoneY)(item.layer);
+}
+
+// Shared collision tracking: stream-name labels claim space first, event
+// annotations fill the rest — the original's dense-but-readable texture.
+let placedRects = [];
+const rectsOverlap = (a, b) =>
+  a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1;
+function tryPlace(r) {
+  if (placedRects.some(p => rectsOverlap(p, r))) return false;
+  placedRects.push(r);
+  return true;
+}
+
+function drawLabels(items) {
+  labelG.selectAll("*").remove();
+  placedRects = [];
+  for (const item of items) {
+    const layer = item.layer;
+    let best = -1, bestW = 0;
+    for (let i = 0; i < layer.length; i++) {
+      const w = layer[i][1] - layer[i][0];
+      if (w > bestW) { bestW = w; best = i; }
+    }
+    if (best < 0) continue;
+    const laneW = item.xmap(layer[best][1]) - item.xmap(layer[best][0]);
+    if (laneW < 18) continue;
+    const size = laneW > 72 ? 12.5 : 10.5;
+    const charW = size * 0.52, lineH = size + 2;
+    const maxChars = Math.floor((laneW - 4) / charW);
+    if (maxChars < 4) continue;
+    const text = item.name || displayName(item.key);
+    const lines = [];
+    let cur = "";
+    for (const word of text.split(/\s+/)) {
+      const cand = cur ? cur + " " + word : word;
+      if (cand.length <= maxChars || !cur) cur = cand;
+      else { lines.push(cur); cur = word; }
+    }
+    lines.push(cur);
+    if (Math.max(...lines.map(l => l.length)) > maxChars * 1.3 || lines.length > 4) continue;
+    const cx = item.xmap((layer[best][0] + layer[best][1]) / 2);
+    const cy = yScale(layer[best].data.year) - ((lines.length - 1) * lineH) / 2 + 3;
+    const hw = Math.max(...lines.map(l => l.length)) * charW / 2;
+    placedRects.push({ x0: cx - hw, x1: cx + hw,
+                       y0: cy - size, y1: cy + lines.length * lineH });
+    const bg = item.bgv
+             || (item.fillv && item.fillv.startsWith("#") ? item.fillv
+                 : baseColorOf(item.key));
+    const st = styleFor(bg.startsWith("#") ? bg : "#888");
+    const t = labelG.append("text").attr("class", "stream-label")
+      .attr("font-size", size).attr("fill", st.fill)
+      .attr("stroke", st.halo).attr("stroke-width", size * 0.21);
+    lines.forEach((ln, j) =>
+      t.append("tspan").attr("x", cx).attr("y", cy + j * lineH).text(ln));
+  }
+  if (focus) {
+    const title = focus.type === "region"
+      ? R.regions[focus.key].label : (FAMILY_LABEL[focus.key] || focus.key);
+    labelG.append("text").attr("class", "focus-title")
+      .attr("x", W / 2).attr("y", M.top - 8)
+      .text(title.toUpperCase());
+  }
+}
+
+// Event annotations inside streams at their dates — the original's defining
+// texture. New approach: EXACT text measurement (canvas), HARD clipping to
+// the anchor stream's path (leaking is geometrically impossible), and
+// span-aware lane-width checks for vertical text.
+const measureCtx = document.createElement("canvas").getContext("2d");
+const EVENT_FONT = '"Segoe UI", system-ui, -apple-system, Arial, sans-serif';
+function textW(text, size) {
+  measureCtx.font = `${size}px ${EVENT_FONT}`;
+  return measureCtx.measureText(text).width + 0.6;
+}
+const safeId = k => "clip-" + k.replace(/[^a-zA-Z0-9]+/g, "-");
+function ensureClip(item) {
+  const id = safeId(item.key);
+  let c = defs.select("#" + id);
+  if (c.empty()) c = defs.append("clipPath").attr("id", id).append("path");
+  else c = c.select("path");
+  c.attr("d", areaPath(item));
+  return `url(#${id})`;
+}
+// Min lane width (px) across all slices whose y falls in [yA, yB] (padded).
+function minLaneW(item, yA, yB) {
+  let m = Infinity;
+  for (let j = 0; j < years.length; j++) {
+    const yy = yScale(years[j]);
+    if (yy < yA - 36 || yy > yB + 36) continue;
+    m = Math.min(m, item.xmap(item.layer[j][1]) - item.xmap(item.layer[j][0]));
+  }
+  return m;
+}
+
+// Place one event inside one stream item: horizontal (measured wrap,
+// span-checked, nudged) then vertical along narrow lanes. Returns success.
+function placeEvent(e, item) {
+  // Use whichever bracketing slice the anchor stream is wider at — an
+  // event can fall between slices, just after its anchor's last record.
+  let i = d3.bisectCenter(years, e.year);
+  const alt = years[i] > e.year ? i - 1 : i + 1;
+  if (alt >= 0 && alt < years.length) {
+    const w0 = item.layer[i][1] - item.layer[i][0];
+    const w1 = item.layer[alt][1] - item.layer[alt][0];
+    if (w1 > w0) i = alt;
+  }
+  const pt = item.layer[i];
+  if (!pt || pt[1] - pt[0] <= 0) return false;
+  const x = item.xmap((pt[0] + pt[1]) / 2);
+  const y0 = yScale(e.year);
+  const st = styleFor(item.bgv || baseColorOf(item.key));
+
+  let placed = null;
+  outer:
+  for (const size of (e.importance >= 3 ? [9.5, 8.5] : [8.5, 7.5])) {
+    const lineH = size + 1.5;
+    for (const nLines of [1, 2, 3]) {
+      const words = e.text.split(/\s+/);
+      if (nLines > words.length) break;
+      const target = Math.ceil(e.text.length / nLines);
+      const lines = [];
+      let cur = "";
+      for (const w of words) {
+        const cand = cur ? cur + " " + w : w;
+        if (cand.length <= target || !cur) cur = cand;
+        else { lines.push(cur); cur = w; }
+      }
+      lines.push(cur);
+      if (lines.length > nLines) continue;
+      const wmax = Math.max(...lines.map(t => textW(t, size)));
+      const h = lines.length * lineH;
+      for (const dy of [0, -12, 12, -24, 24, -38, 38]) {
+        const y = y0 + dy;
+        if (minLaneW(item, y - size, y + h) < wmax + 5) continue;
+        const r = { x0: x - wmax / 2 - 2, x1: x + wmax / 2 + 2,
+                    y0: y - size, y1: y + h };
+        if (tryPlace(r)) { placed = { size, lineH, lines, y }; break outer; }
+      }
+    }
+  }
+  if (placed) {
+    const t = eventG.append("text").attr("class", "event-label")
+      .attr("clip-path", ensureClip(item))
+      .attr("font-size", placed.size).attr("fill", st.fill)
+      .attr("font-weight", e.inflection ? 600 : 400)
+      .attr("stroke", st.halo).attr("stroke-width", 0.9);
+    placed.lines.forEach((ln, j) =>
+      t.append("tspan").attr("x", x)
+        .attr("y", placed.y + j * placed.lineH + 3).text(ln));
+    return true;
+  }
+  // Vertical along narrow streams (the original's trick).
+  let vert = null;
+  for (const size of [8.5, 7.5]) {
+    const len = textW(e.text, size);
+    for (const dy of [0, -24, 24, -52, 52, -84, 84]) {
+      const y = y0 + dy;
+      if (minLaneW(item, y - len / 2, y + len / 2) < size + 5) continue;
+      const r = { x0: x - size / 2 - 2, x1: x + size / 2 + 2,
+                  y0: y - len / 2, y1: y + len / 2 };
+      if (tryPlace(r)) { vert = { size, y }; break; }
+    }
+    if (vert) break;
+  }
+  if (!vert) return false;
+  eventG.append("text").attr("class", "event-label")
+    .attr("clip-path", ensureClip(item))
+    .attr("font-size", vert.size).attr("fill", st.fill)
+    .attr("font-weight", e.inflection ? 600 : 400)
+    .attr("stroke", st.halo).attr("stroke-width", 0.9)
+    .attr("transform", `translate(${x + vert.size * 0.35},${vert.y}) rotate(-90)`)
+    .text(e.text);
+  return true;
+}
+
+function drawEvents(items) {
+  eventG.selectAll("*").remove();
+  if (typeof HISTOMAP_EVENTS === "undefined" || !showEvents) return;
+  if (focus && focus.type === "civ") return;
+  const evs = [...HISTOMAP_EVENTS].sort((a, b) =>
+    (b.banner ? 1 : 0) - (a.banner ? 1 : 0) ||
+    (b.inflection ? 1 : 0) - (a.inflection ? 1 : 0) ||
+    b.importance - a.importance || a.year - b.year);
+  const stats = { placed: 0, skipped: 0 };
+  window._evStats = stats;
+
+  if (focus && focus.type === "region") {
+    // Region column: banners span the column; ruler events place in lanes.
+    const colItems = items.filter(it => it.key.startsWith("__col__"));
+    const byRaw = new Map(colItems.filter(it => it.raw).map(it => [it.raw, it]));
+    for (const e of evs) {
+      if (e.banner) {
+        if (e.region !== focus.key) continue;
+        const y = yScale(e.year);
+        const wpx = textW(e.text.toUpperCase(), 13) * 1.25;
+        const r = { x0: W / 2 - wpx / 2, x1: W / 2 + wpx / 2,
+                    y0: y - 12, y1: y + 8 };
+        if (!tryPlace(r)) { stats.skipped++; continue; }
+        stats.placed++;
+        eventG.append("text").attr("class", "event-banner")
+          .attr("x", W / 2).attr("y", y + 4)
+          .text(e.text.toUpperCase());
+        continue;
+      }
+      if (e.region && e.region !== focus.key) continue;
+      const item = byRaw.get(e.anchor);
+      if (!item) continue;
+      if (placeEvent(e, item)) stats.placed++; else stats.skipped++;
+    }
+    return;
+  }
+
+  // World view: regional events stay in their columns.
+  const byKey = new Map(items.map(it => [it.key, it]));
+  for (const e of evs) {
+    if (e.region || e.banner) continue;
+    let item;
+    if (e.anchor === "global") {
+      const i0 = d3.bisectCenter(years, e.year);
+      const wOf = it => it ? it.layer[i0][1] - it.layer[i0][0] : -1;
+      const l = byKey.get(GRAY_L), r = byKey.get(GRAY_R);
+      item = wOf(l) >= wOf(r) ? l : r;
+    } else item = byKey.get(e.anchor);
+    if (!item) { stats.skipped++; continue; }
+    if (placeEvent(e, item)) stats.placed++; else stats.skipped++;
+  }
+}
+
+function showTip(ev, d) {
+  const year = Math.round(yScale.invert(d3.pointer(ev, svg.node())[1]));
+  const i = d3.bisectCenter(years, year);
+  const yearTxt = years[i] < 0 ? -years[i] + " BCE" : years[i] + " CE";
+  let html;
+  if (d.rdata) {
+    const rd = d.rdata;
+    const tot = rd.totals[i];
+    const v = rd.arr[i];
+    const share = tot > 0 ? v / tot : 0;
+    const popTxt = rd.isShare ? "" : `<br>(~${fmtPop(v)} people)`;
+    html = `<b>${rd.name}</b><br><span class="fam">${rd.label}</span><br>` +
+      `${yearTxt}: ${fmtPct(share)} of ${rd.label}${popTxt}`;
+  } else {
+    const s = seriesFor(d.key)[i];
+    const name = displayName(d.key);
+    const fam = D.regions[name];
+    const sub = (D.subfamilies || {})[name];
+    const famLine = fam ? `<br><span class="fam">${FAMILY_LABEL[fam] || fam}${
+      sub && !["bundle", "geo", "unknown", "colonial", "unrecorded"].includes(sub) ? " · " + sub : ""}</span>` : "";
+    html = `<b>${name}</b>${famLine}<br>${yearTxt}:
+      ${fmtPct(s.share)} of world population<br>(~${fmtPop(s.pop)} people)`;
+  }
+  tip.style.display = "block";
+  tip.style.left = (ev.clientX + 14) + "px";
+  tip.style.top = (ev.clientY + 10) + "px";
+  tip.innerHTML = html;
+}
+
+function render(animate) {
+  const items = computeItems();
+  const keys = stackKeys();
+  const sel = streamG.selectAll(".stream").data(items, d => d.key);
+  sel.exit().remove();
+  const entered = sel.enter().append("path")
+    .attr("class", "stream")
+    .on("click", (ev, d) => {
+      if (focus) { setFocus(null); return; }
+      const name = displayName(d.key);
+      if (ev.shiftKey) {
+        const fam = D.regions[name];
+        if (fam) setFocus({ type: "civ", key: fam });
+        return;
+      }
+      const reg = R && R.home[name];
+      if (reg && R.regions[reg]) setFocus({ type: "region", key: reg, anchor: d.key });
+      else {
+        const fam = D.regions[name];
+        if (fam) setFocus({ type: "civ", key: fam });
+      }
+    })
+    .on("mousemove", showTip)
+    .on("mouseleave", () => { tip.style.display = "none"; });
+  const merged = entered.merge(sel)
+    .attr("fill", d => d.fillv || fill(d.key));
+  (animate ? merged.transition().duration(900) : merged)
+    .attr("d", d => areaPath(d));
+  sepG.style("display", focus ? "none" : null);
+  if (!focus) {
+    const byKey = new Map(items.map(it => [it.key, it]));
+    const sepIdx = [];
+    for (let i = 1; i < keys.length; i++) {
+      const a = d3.lab(color(keys[i - 1])), b = d3.lab(color(keys[i]));
+      if (Math.hypot(a.l - b.l, a.a - b.a, a.b - b.b) < SEP_DELTA_E) sepIdx.push(i);
+    }
+    const seps = sepG.selectAll(".sep").data(sepIdx);
+    seps.exit().remove();
+    const sepM = seps.enter().append("path").attr("class", "sep").merge(seps);
+    (animate ? sepM.transition().duration(900) : sepM)
+      .attr("d", i => edgePath(byKey.get(keys[i])));
+  }
+  const annotate = () => { drawLabels(items); drawEvents(items); };
+  if (animate) setTimeout(annotate, 920);
+  else annotate();
+}
+const SEP_DELTA_E = 8;
+
+function applyScheme() {
+  const css = S().css;
+  const root = document.documentElement.style;
+  root.setProperty("--bg", css.bg);
+  root.setProperty("--ink", css.ink);
+  root.setProperty("--muted", css.muted);
+  root.setProperty("--outline", css.outline);
+  root.setProperty("--grid", css.grid);
+  root.setProperty("--sw", css.sw || "0.6");
+  buildColors();
+  buildPatterns();
+  buildGradients();
+}
+applyScheme();
+render(false);
+
+function setFocus(f) { focus = f; render(true); }
+function setMode(m) {
+  if (m === mode) return;
+  mode = m;
+  document.getElementById("mode-share").classList.toggle("active", m === "share");
+  document.getElementById("mode-abs").classList.toggle("active", m === "abs");
+  render(true);
+}
+document.getElementById("mode-share").onclick = () => setMode("share");
+document.getElementById("mode-abs").onclick = () => setMode("abs");
+{
+  const sel = document.getElementById("scheme");
+  for (const [k, sc] of Object.entries(SCHEMES)) {
+    const o = document.createElement("option");
+    o.value = k; o.textContent = sc.label;
+    sel.appendChild(o);
+  }
+  sel.onchange = () => { schemeKey = sel.value; applyScheme(); render(false); };
+}
+document.getElementById("nogray").onchange = ev => {
+  hideGray = ev.target.checked;
+  render(true);
+};
+document.getElementById("events-ck").onchange = ev => {
+  showEvents = ev.target.checked;
+  render(false);
+};
+document.addEventListener("keydown", ev => {
+  if (ev.key === "Escape" && focus) setFocus(null);
+});
+</script>
+</body>
+</html>

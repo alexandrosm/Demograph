@@ -1,0 +1,41 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Large raw downloads (regenerate via the pipeline scripts)
+data/raw/
+
+# Regenerable pipeline binaries (the committed *.csv / web/*.js are the
+# human-readable / runtime outputs; these are rebuildable intermediates)
+data/processed/region_grid.npy
+data/processed/unrecorded_overlay.npz
+data/processed/fingerprint_table.txt
+data/processed/region_events_workflow.js
+data/processed/stream_names.json
+data/processed/region_unexplained.json
+data/processed/unexplained_changes.json
+
+# Optimizer candidates (only orders/stream_order.json is the applied order)
+orders/both0.json
+orders/both1.json
+orders/both2.json
+orders/both.json
+orders/free0.json
+orders/free1.json
+orders/free2.json
+orders/transfer.json
+orders/within.json
+
+# Superseded exploratory variants (replaced by the in-app palette dropdown)
+web/variant*.html
+web/variant*.png
+web/data_v*.js
+
+# Dev screenshots (curated showcase images live in docs/)
+web/*.png
+
+# Workflow scratch
+scratch/
+
+.DS_Store

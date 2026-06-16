@@ -1,0 +1,595 @@
+stream,from,to,dshare,kind,share_before,share_after,succession_partner,paired_events,explained
+Mughal Empire,1700,1750,-0.257,collapse,0.2929,0.0359,Afsharid Iran | Carnatic Sultanate | Hyderabad State | Maratha Empire | Nawab of Awadh | Nawabs of Bengal,Shivaji crowned Chhatrapati | Nader Shah sacks Mughal Delhi | Plassey: the Company seizes Bengal,True
+Qing Dynasty,1900,1950,-0.2228,collapse,0.2228,0.0,People's Republic of China,Qing falls; China a republic | Mao proclaims People's China | Deng opens China to the market,True
+Maurya Empire,-320,-300,0.2226,surge,0.0,0.2226,Macedonian Empire | Nanda Empire,Mahapadma Nanda usurps Magadha throne | Alexander storms into Asia | Chandragupta founds Maurya Empire,True
+Gupta Empire,300,350,0.2197,surge,0.0,0.2197,Eastern Kushans | Western Satraps,Kushano-Sasanians overrun Gandhara | Samudragupta conquers north India,True
+British Empire,1850,1900,-0.2103,collapse,0.2103,0.0,British Raj,"After the Mutiny, Crown rules India | Darwin publishes the Origin | Gandhi's Salt March defies the Raj",True
+British Raj,1850,1900,0.2096,surge,0.0,0.2096,British Empire,"After the Mutiny, Crown rules India | Darwin publishes the Origin | Gandhi's Salt March defies the Raj",True
+British Raj,1900,1950,-0.2096,collapse,0.2096,0.0,Islamic Republic of Pakistan | Republic of India,Gandhi's Salt March defies the Raj | India freed; Partition bleeds,True
+People's Republic of China,1900,1950,0.2084,surge,0.0,0.2084,German Empire | Qing Dynasty | Russian Empire,Bismarck forges the German Empire | Berlin conference carves up Africa | Qing falls; China a republic | Bolsheviks seize Russia | Mao proclaims People's China | Deng opens China to the market,True
+Mughal Empire,1550,1600,0.2067,surge,0.0033,0.21,Sur Empire,"Babur wins Panipat, founds Mughals | Akbar builds Mughal splendor | Taj Mahal rises at Agra",True
+Gupta Empire,550,600,-0.1924,collapse,0.1924,0.0,Maukhari Dynasty,Huna-battered Gupta line expires | Ishanavarman exalts Maukhari Kannauj,True
+Nanda Empire,-350,-325,0.1905,surge,0.0,0.1905,Magadha - Shaishunaga dynasty,Mahapadma Nanda usurps Magadha throne | Nanda usurper ends Shaishunaga line,True
+Nanda Empire,-320,-300,-0.1882,collapse,0.1882,0.0,Maurya Empire,Mahapadma Nanda usurps Magadha throne | Chandragupta founds Maurya Empire,True
+Yuan Dynasty,1250,1300,0.1837,surge,0.0,0.1837,Mongol Empire | Southern Song,Kublai Khan founds the Yuan | Marco Polo reaches Kublai's court,True
+Yuan Dynasty,1350,1400,-0.1772,collapse,0.1772,0.0,Ming Dynasty,"Hongwu expels Mongols, founds Ming | Zheng He's treasure fleets sail",True
+Roman Empire,350,400,-0.1758,collapse,0.1758,0.0,Eastern Roman Empire | Huns | Western Roman Empire,Constantine embraces Christianity | Constantinople founded | Huns burst into Europe | Goths crush legions at Adrianople | Alaric's Goths sack Rome | Augustine writes the City of God,True
+Tughlaq Dynasty,1300,1350,0.1708,surge,0.0,0.1708,Chandela Kingdom | Kakatiya Dynasty | Yadava Dynasty,Delhi flays Harapala; Devagiri annexed | Ghiyasuddin Tughlaq seizes Delhi | Tughlaq armies annex Kakatiya Warangal,True
+Ming Dynasty,1600,1650,-0.1685,collapse,0.1685,0.0,Qing Dynasty | Southern Ming,Manchus take Beijing; Qing rise | Beijing falls; Ming rally in Nanjing,True
+Kanva Dynasty,-50,0,-0.168,collapse,0.168,0.0,Satavahana Dynasty,Vasudeva Kanva slays Shunga king | Satavahanas overthrow the last Kanva,True
+Kanva Dynasty,-100,-50,0.168,surge,0.0,0.168,Indo-Greeks | Shunga Empire,Vasudeva Kanva slays Shunga king | Minister's coup ends Shunga line | Satavahanas overthrow the last Kanva,True
+Maurya Empire,-250,-200,-0.1679,collapse,0.3327,0.1649,Satavahana Dynasty,Ashoka's edicts spread Buddhism,True
+Maurya Empire,-200,-150,-0.1649,collapse,0.1649,0.0,Shunga Empire,Mahabharata epic takes shape,True
+Shunga Empire,-200,-150,0.1631,surge,0.0,0.1631,Maurya Empire,Mahabharata epic takes shape,True
+Shunga Empire,-100,-50,-0.1599,collapse,0.1599,0.0,Kanva Dynasty,Vasudeva Kanva slays Shunga king | Minister's coup ends Shunga line | Satavahanas overthrow the last Kanva,True
+Sur Empire,1500,1550,0.1557,surge,0.0,0.1557,Lodi Dynasty | Sultanate of Bengal,Guru Nanak founds Sikhism | Sher Shah Suri overruns Bengal,True
+Sur Empire,1550,1600,-0.1557,collapse,0.1557,0.0,Mughal Empire,"Babur wins Panipat, founds Mughals | Akbar builds Mughal splendor | Taj Mahal rises at Agra",True
+Sui Dynasty,600,650,-0.1549,collapse,0.1549,0.0,Tang Dynasty,Sui reunites China | Grand Canal links China's rivers | Tang dynasty rises at Chang'an,True
+Sui Dynasty,550,600,0.1549,surge,0.0,0.1549,Eastern Wei | Liang Dynasty | Western Wei,Gao Huan enthrones the Eastern Wei | Sui reunites China | Grand Canal links China's rivers,True
+Ming Dynasty,1350,1400,0.153,surge,0.0,0.153,Yuan Dynasty,"Hongwu expels Mongols, founds Ming | Zheng He's treasure fleets sail",True
+Han Dynasty,-250,-200,0.1515,surge,0.0,0.1515,Chu | Minyue | Qi | Qin,First Emperor unites China | Great Wall rises against the steppe | Liu Bang founds the Han,True
+Roman Empire,-50,0,0.1477,surge,0.0,0.1477,Ptolemaic Kingdom | Roman Republic,"Caesar slain in the Senate | Cleopatra dies; Egypt made Roman | Augustus, first Roman emperor | Jesus born in Roman Judea | Jesus of Nazareth crucified",True
+Republic of India,1900,1950,0.1464,surge,0.0,0.1464,British Raj,Gandhi's Salt March defies the Raj | India freed; Partition bleeds,True
+Tang Dynasty,600,650,0.1449,surge,0.0,0.1449,Sui Dynasty,Sui reunites China | Grand Canal links China's rivers | Tang dynasty rises at Chang'an,True
+Mongol Empire,1200,1250,0.1443,surge,0.0,0.1443,Ghurid Dynasty | Great Jin | Great Seljuk Empire,Muhammad of Ghor triumphs at Tarain | Temujin proclaimed Genghis Khan,True
+Mongol Empire,1250,1300,-0.1443,collapse,0.1443,0.0,Chagatai Khanate | Golden Horde | Ilkhanate | Yuan Dynasty,Kublai Khan founds the Yuan | Marco Polo reaches Kublai's court,True
+Mamluk Dynasty,1250,1300,-0.1437,collapse,0.1437,0.0,,Khalji coup ends the Slave dynasty,True
+Mamluk Dynasty,1200,1250,0.1437,surge,0.0,0.1437,,Aibak founds the Delhi Sultanate | Khalji coup ends the Slave dynasty,True
+Han Dynasty,200,250,-0.142,collapse,0.142,0.0,Cao Wei | Eastern Wu | Shu Han,"Red Cliffs secures Sun Quan's south | Wei, Shu, Wu: Three Kingdoms",True
+Maukhari Dynasty,550,600,0.1385,surge,0.0,0.1385,Gupta Empire,Huna-battered Gupta line expires | Ishanavarman exalts Maukhari Kannauj,True
+Maukhari Dynasty,600,650,-0.1385,collapse,0.1385,0.0,Harsha's Empire,Brahmagupta reckons with zero,True
+Magadha - Shaishunaga dynasty,-450,-400,0.1372,surge,0.0,0.1372,Magadha - Haryanka dynasty,Buddha preaches the Middle Way | Mahavira founds the Jain path,True
+Magadha - Shaishunaga dynasty,-350,-325,-0.1367,collapse,0.1367,0.0,Nanda Empire,Mahapadma Nanda usurps Magadha throne | Nanda usurper ends Shaishunaga line,True
+Southern Song,1000,1050,0.1361,surge,0.0,0.1361,Northern Song,Song dynasty reunifies China | World's first paper money issued,True
+Tughlaq Dynasty,1350,1400,-0.133,collapse,0.1708,0.0378,Bahmani Sultanate | Jaunpur Sultanate | Sultanate of Bengal,Ghiyasuddin Tughlaq seizes Delhi | Tughlaq armies annex Kakatiya Warangal | Timur sacks Delhi,True
+Kushan Empire,200,250,-0.1239,collapse,0.1239,0.0,Eastern Kushans | Western Kushans,Sasanian onslaught splits Kushan realm | Kushan realm parts after Vasudeva I | Kushano-Sasanians overrun Gandhara,True
+Kannauj-Varman Dynasty,700,750,0.1201,surge,0.0,0.1201,,Yashovarman lifts Kannauj to empire | Palas and Pratiharas contest Kannauj,True
+Kannauj-Varman Dynasty,750,800,-0.1201,collapse,0.1201,0.0,Gurjara-Pratihara Dynasty | Pala Empire,"Yashovarman lifts Kannauj to empire | Nagabhata's Pratiharas repel Arab thrust | Bengal elects Gopala, Palas rise | Palas and Pratiharas contest Kannauj",True
+Eastern Kushans,200,250,0.1184,surge,0.0,0.1184,Kushan Empire,Sasanian onslaught splits Kushan realm | Kushan realm parts after Vasudeva I | Kushano-Sasanians overrun Gandhara,True
+Qing Dynasty,1850,1900,-0.1175,collapse,0.3404,0.2228,Empire of Japan | Russian Empire,Opium War pries China open | Taiping rebellion bleeds China | Meiji restoration remakes Japan | Qing falls; China a republic | Bolsheviks seize Russia,True
+Pala Empire,750,800,0.1117,surge,0.0228,0.1344,Kannauj-Varman Dynasty,"Yashovarman lifts Kannauj to empire | Bengal elects Gopala, Palas rise | Palas and Pratiharas contest Kannauj",True
+Maurya Empire,-300,-250,0.1102,surge,0.2226,0.3327,,Chandragupta founds Maurya Empire | Ashoka's edicts spread Buddhism,True
+Roman Republic,-50,0,-0.1097,collapse,0.1097,0.0,Roman Empire,"Caesar slain in the Senate | Augustus, first Roman emperor | Jesus born in Roman Judea | Jesus of Nazareth crucified",True
+British Empire,1800,1850,0.1083,surge,0.1019,0.2103,Carnatic Sultanate | Durrani Empire | Maratha Empire | Mughal Empire | Nawab of Awadh,Darwin publishes the Origin,True
+Eastern Kushans,250,300,-0.1068,collapse,0.1184,0.0116,,Kushan realm parts after Vasudeva I | Kushano-Sasanians overrun Gandhara,True
+Tang Dynasty,900,950,-0.1062,collapse,0.1062,0.0,Later Han | Later Shu | Liao Dynasty | Southern Chu | Southern Han | Southern Wu,"Diamond Sutra, oldest printed book",True
+Southern Song,1250,1300,-0.1061,collapse,0.1061,0.0,Yuan Dynasty,Kublai Khan founds the Yuan | Marco Polo reaches Kublai's court,True
+Khalji Dynasty,1250,1300,0.1049,surge,0.0,0.1049,,Alauddin Khalji seizes the sultanate | Tughlaq revolt ends Khalji line,True
+Khalji Dynasty,1300,1350,-0.1049,collapse,0.1049,0.0,,Alauddin Khalji seizes the sultanate | Tughlaq revolt ends Khalji line,True
+Liu Song Dynasty,400,450,0.1021,surge,0.0,0.1021,Later Qin | Later Yan | Western Jin,"Liu Yu usurps Jin, founds Song | Liu Yu usurps the Jin, founds Song",True
+Liu Song Dynasty,450,500,-0.1021,collapse,0.1021,0.0,Northern Wei | Southern Qi,"Liu Yu usurps Jin, founds Song | Northern Wei unify north China | Xiao Daocheng usurps Liu Song throne | Xiao Yan topples Qi, founds Liang | Northern Wei splits east and west",True
+British Empire,1750,1800,0.1019,surge,0.0,0.1019,Dutch Republic | Hyderabad State | Kingdom of Mysore | Mughal Empire | Nawabs of Bengal,Nader Shah sacks Mughal Delhi | Plassey: the Company seizes Bengal,True
+Russian Empire,1900,1950,-0.0988,collapse,0.0988,0.0,People's Republic of China | Union of Soviet Socialist Republics,Bolsheviks seize Russia | Mao proclaims People's China | Sputnik opens the space age | Deng opens China to the market,True
+Ptolemaic Kingdom,-350,-325,0.0938,surge,0.0,0.0938,Achaemenid Empire | Thirtieth Dynasty of Egypt,Great Library rises at Alexandria,True
+Qing Dynasty,1600,1650,0.0924,surge,0.0,0.0924,Ming Dynasty,Manchus take Beijing; Qing rise,True
+Gupta Empire,450,500,-0.0898,collapse,0.2829,0.193,Maitraka Dynasty | Vakataka Kingdom | White Huns,"Kalidasa graces the Gupta court | Nalanda university founded | Aryabhata: earth spins, pi reckoned | White Huns batter Persia and India",True
+Western Roman Empire,350,400,0.0895,surge,0.0,0.0895,Roman Empire,Constantine embraces Christianity | Constantinople founded | Alaric's Goths sack Rome | Augustine writes the City of God,True
+Rashtrakuta Dynasty,750,800,0.0885,surge,0.0,0.0885,Chalukya Dynasty,Kailasa temple hewn at Ellora,True
+Magadha - Haryanka dynasty,-450,-400,-0.0881,collapse,0.0881,0.0,Magadha - Shaishunaga dynasty,Buddha preaches the Middle Way | Mahavira founds the Jain path,True
+Great Jin,1200,1250,-0.0879,collapse,0.0879,0.0,Mongol Empire,Temujin proclaimed Genghis Khan,True
+Northern Song,950,1000,0.0877,surge,0.0,0.0877,Later Han | Later Shu | Southern Chu | Southern Han | Southern Wu,Song dynasty reunifies China | World's first paper money issued,True
+Northern Song,1000,1050,-0.0877,collapse,0.0877,0.0,Southern Song,Song dynasty reunifies China | World's first paper money issued,True
+Great Jin,1100,1150,0.0868,surge,0.0,0.0868,Liao Dynasty | Southern Song,Jurchen revolt topples the Liao | Jin take Kaifeng; Song flee south,True
+Western Jin,250,300,0.0858,surge,0.0,0.0858,Cao Wei | Eastern Wu | Shu Han,"Wei, Shu, Wu: Three Kingdoms | Luoyang sacked; Jin flees south",True
+Southern Qi,500,550,-0.083,collapse,0.083,0.0,Liang Dynasty | Western Wei,"Xiao Daocheng usurps Liu Song throne | Xiao Yan topples Qi, founds Liang | Xiao Yan topples Qi, founds the Liang",True
+Southern Qi,450,500,0.083,surge,0.0,0.083,Liu Song Dynasty,"Liu Yu usurps Jin, founds Song | Xiao Daocheng usurps Liu Song throne | Xiao Yan topples Qi, founds Liang",True
+Southern Ming,1600,1650,0.0822,surge,0.0,0.0822,Ming Dynasty,Beijing falls; Ming rally in Nanjing,True
+Southern Ming,1650,1700,-0.0822,collapse,0.0822,0.0,Qing Dynasty,Manchus take Beijing; Qing rise | Beijing falls; Ming rally in Nanjing,True
+Liang Dynasty,550,600,-0.0821,collapse,0.0821,0.0,Sui Dynasty,Sui reunites China | Grand Canal links China's rivers,True
+Liang Dynasty,500,550,0.0821,surge,0.0,0.0821,Southern Qi,"Xiao Daocheng usurps Liu Song throne | Xiao Yan topples Qi, founds Liang | Xiao Yan topples Qi, founds the Liang",True
+Union of Soviet Socialist Republics,1950,2000,-0.0804,collapse,0.0804,0.0,Russian Federation,Sputnik opens the space age | Soviet Union dissolves,True
+Union of Soviet Socialist Republics,1900,1950,0.0804,surge,0.0,0.0804,Austria-Hungary | German Empire | Russian Empire,Bismarck forges the German Empire | Berlin conference carves up Africa | Bolsheviks seize Russia | Sputnik opens the space age,True
+Umayyad Caliphate,650,700,0.0799,surge,0.0,0.0799,Rashidun Caliphate,Yarmouk: Arab armies take Syria | Karbala: Shia mourn Husayn,True
+Chalukya Dynasty,750,800,-0.0787,collapse,0.0787,0.0,Rashtrakuta Dynasty,Kailasa temple hewn at Ellora,True
+Rashtrakuta Dynasty,950,1000,-0.0756,collapse,0.0756,0.0,Western Chalukya Empire,Taila II overthrows the Rashtrakutas | Chalukya rule restored from Kalyani,True
+Western Jin,400,450,-0.0755,collapse,0.0755,0.0,Liu Song Dynasty,"Liu Yu usurps Jin, founds Song | Liu Yu usurps the Jin, founds Song",True
+Qing Dynasty,1650,1700,0.0753,surge,0.0924,0.1677,Southern Ming,Manchus take Beijing; Qing rise | Beijing falls; Ming rally in Nanjing,True
+Achaemenid Empire,-350,-325,-0.0745,collapse,0.0745,0.0,Ptolemaic Kingdom,Great Library rises at Alexandria,True
+Qing Dynasty,1750,1800,0.0737,surge,0.2395,0.3132,,Qing crush the last steppe empire | Opium War pries China open,True
+Mughal Empire,1650,1700,0.0733,surge,0.2196,0.2929,Bijapur Sultanate | Golconda Sultanate,Taj Mahal rises at Agra | Nader Shah sacks Mughal Delhi,True
+Rashidun Caliphate,650,700,-0.0732,collapse,0.0732,0.0,Umayyad Caliphate,Yarmouk: Arab armies take Syria | Karbala: Shia mourn Husayn,True
+Rashidun Caliphate,600,650,0.0732,surge,0.0,0.0732,Eastern Roman Empire | Sasanian Empire,Yarmouk: Arab armies take Syria | Sasanian Persia falls to the Arabs,True
+Magadha - Haryanka dynasty,-500,-450,0.0721,surge,0.0159,0.0881,,Buddha preaches the Middle Way | Mahavira founds the Jain path,True
+Qing Dynasty,1700,1750,0.0718,surge,0.1677,0.2395,,Qing crush the last steppe empire,True
+Nawabs of Bengal,1700,1750,0.0713,surge,0.0,0.0713,Mughal Empire,Nader Shah sacks Mughal Delhi | Plassey: the Company seizes Bengal,True
+Nawabs of Bengal,1750,1800,-0.0713,collapse,0.0713,0.0,British Empire,Plassey: the Company seizes Bengal,True
+Western Chalukya Empire,950,1000,0.0712,surge,0.0,0.0712,Rashtrakuta Dynasty,Taila II overthrows the Rashtrakutas | Chalukya rule restored from Kalyani,True
+Lodi Dynasty,1450,1500,0.0679,surge,0.0,0.0679,Jaunpur Sultanate | Sayyid Dynasty,Guru Nanak founds Sikhism,True
+Lodi Dynasty,1500,1550,-0.0679,collapse,0.0679,0.0,Sur Empire,Guru Nanak founds Sikhism,True
+Satavahana Dynasty,200,250,-0.0672,collapse,0.0672,0.0,Western Satraps,"Nagarjuna, philosopher of emptiness",True
+Umayyad Caliphate,750,800,-0.0654,collapse,0.0654,0.0,Abbasid Caliphate | Emirate of Córdoba,Round city of Baghdad founded | Al-Khwarizmi gives algebra its name,True
+Chalukya Dynasty,600,650,0.0652,surge,0.0233,0.0886,,Pulakeshin II checks Harsha at Narmada,True
+Eastern Roman Empire,350,400,0.0637,surge,0.0,0.0637,Roman Empire,Constantine embraces Christianity | Constantinople founded | Goths crush legions at Adrianople,True
+Maratha Empire,1800,1850,-0.0636,collapse,0.0636,0.0,British Empire,Darwin publishes the Origin,True
+Kushan Empire,100,150,0.0629,surge,0.0635,0.1265,,Kanishka's Kushan golden age,True
+Eastern Roman Empire,600,650,-0.0625,collapse,0.0625,0.0,Byzantine Empire | Rashidun Caliphate,Yarmouk: Arab armies take Syria,True
+Vakataka Kingdom,550,600,-0.0621,collapse,0.0621,0.0,Chalukya Dynasty,Vakatakas fade; Badami Chalukyas rise | Pulakeshin II checks Harsha at Narmada,True
+Abbasid Caliphate,750,800,0.0601,surge,0.0202,0.0803,Umayyad Caliphate,Round city of Baghdad founded | Al-Khwarizmi gives algebra its name,True
+Vakataka Kingdom,250,300,0.0593,surge,0.0,0.0593,,,False
+Sultanate of Bengal,1500,1550,-0.0592,collapse,0.0592,0.0,Sur Empire,Sher Shah Suri overruns Bengal,True
+Achaemenid Empire,-550,-500,0.0573,surge,0.0426,0.0999,Lydia | Neo-Babylonian Empire | Twenty-sixth Dynasty of Egypt,"Jerusalem burns; exile to Babylon | Cyrus takes Babylon, frees exiles",True
+Kushan Empire,50,100,0.0572,surge,0.0063,0.0635,Indo-Parthians | Indo-Scythians,Kanishka's Kushan golden age,True
+United States of America,1950,2000,-0.0568,collapse,0.107,0.0502,Japan,Wall Street crashes; world slump | Man walks on the Moon | Jets topple the Twin Towers,True
+United States of America,1900,1950,0.0546,surge,0.0524,0.107,Empire of Japan,Civil War rends the Union | Meiji restoration remakes Japan | Wall Street crashes; world slump | Atom bomb levels Hiroshima | Man walks on the Moon,True
+Zhou Dynasty,-800,-750,-0.0537,collapse,0.0537,0.0,Chu | Jin | Qi | Wu,Zhou court flees east to Luoyang,True
+Southern Song,1100,1150,-0.0535,collapse,0.1762,0.1227,Great Jin,Jin take Kaifeng; Song flee south,True
+Sultanate of Bengal,1350,1400,0.0535,surge,0.0027,0.0562,Tughlaq Dynasty,Ghiyasuddin Tughlaq seizes Delhi | Tughlaq armies annex Kakatiya Warangal | Timur sacks Delhi,True
+Chu,-250,-200,-0.0532,collapse,0.0532,0.0,Han Dynasty,Liu Bang founds the Han,True
+White Huns,450,500,0.0524,surge,0.0032,0.0556,Gupta Empire | Kidarites,"Kalidasa graces the Gupta court | Nalanda university founded | Aryabhata: earth spins, pi reckoned | White Huns batter Persia and India",True
+Late Pallava Empire,350,400,-0.0521,collapse,0.0551,0.003,Gupta Empire | Kalabhra Dynasty,Pallavas of Kanchi eclipse Chola power | Samudragupta conquers north India | Kalabhras overrun the Tamil kingdoms | Kalidasa graces the Gupta court | Nalanda university founded,True
+Cao Wei,200,250,0.0519,surge,0.0,0.0519,Cao Cao | Han Dynasty,"Red Cliffs: Cao Cao turned back | Wei, Shu, Wu: Three Kingdoms",True
+Cao Wei,250,300,-0.0519,collapse,0.0519,0.0,Western Jin,"Wei, Shu, Wu: Three Kingdoms | Luoyang sacked; Jin flees south",True
+Abbasid Caliphate,850,900,-0.0515,collapse,0.0786,0.0271,Samanid Empire | Tulunids,Al-Khwarizmi gives algebra its name,True
+Eastern Wu,250,300,-0.0506,collapse,0.0506,0.0,Western Jin,Luoyang sacked; Jin flees south,True
+Eastern Wu,200,250,0.0506,surge,0.0,0.0506,Han Dynasty,Red Cliffs secures Sun Quan's south,True
+Satavahana Dynasty,-250,-200,0.0501,surge,0.0,0.0501,Maurya Empire,Ashoka's edicts spread Buddhism,True
+Gahadavala Dynasty,1050,1100,0.0501,surge,0.0,0.0501,Pala Empire,Kaivarta revolt rends Pala Varendra | Gahadavala Chandradeva seizes Kanauj,True
+Western Roman Empire,450,500,-0.0497,collapse,0.0497,0.0,Ostrogothic Kingdom | Salian Franks | Visigothic Kingdom,"Alaric's Goths sack Rome | Augustine writes the City of God | Attila turned back in Gaul | Last emperor of the West deposed | Clovis, king of the Franks, baptized | Benedict founds Monte Cassino",True
+Late Pallava Empire,300,350,0.0486,surge,0.0065,0.0551,Early Cholas,Pallavas of Kanchi eclipse Chola power,True
+Gahadavala Dynasty,1200,1250,-0.0485,collapse,0.0485,0.0,,Ghurids crush Jaichand at Chandawar,True
+Western Chalukya Empire,1150,1200,-0.0466,collapse,0.0466,0.0,Kakatiya Dynasty | Yadava Dynasty,Bhillama throws off Chalukya yoke | Yadavas and Kakatiyas carve up Kalyani,True
+Ptolemaic Kingdom,-325,-320,-0.0463,collapse,0.0938,0.0474,Macedonian Empire,Alexander storms into Asia | Great Library rises at Alexandria,True
+Jaunpur Sultanate,1350,1400,0.0463,surge,0.0,0.0463,Tughlaq Dynasty,Ghiyasuddin Tughlaq seizes Delhi | Tughlaq armies annex Kakatiya Warangal | Timur sacks Delhi,True
+Russian Empire,1850,1900,0.0452,surge,0.0536,0.0988,Qing Dynasty,Opium War pries China open | Taiping rebellion bleeds China | Qing falls; China a republic | Bolsheviks seize Russia,True
+Greco-Bactrian Kingdom,-150,-100,-0.0445,collapse,0.0445,0.0,Indo-Greeks,Demetrius takes Bactrian arms into India | Yuezhi nomads overrun Bactria,True
+Jaunpur Sultanate,1450,1500,-0.0445,collapse,0.0445,0.0,Lodi Dynasty,Guru Nanak founds Sikhism,True
+Roman Republic,-100,-50,0.0434,surge,0.0663,0.1097,Seleucid Empire,Caesar slain in the Senate,True
+Holy Roman Empire,1250,1300,-0.0433,collapse,0.0433,0.0,Holy Roman Empire Minor States,Death of Frederick II; Great Interregnum | Hohenstaufen fall; princes go their way,True
+Achaemenid Empire,-600,-550,0.0426,surge,0.0,0.0426,Median Kingdom,Zoroaster preaches in Iran,True
+German Empire,1900,1950,-0.0425,collapse,0.0425,0.0,Federal Republic of Germany | French Fourth Republic | People's Republic of China | Union of Soviet Socialist Republics,Bismarck forges the German Empire | Berlin conference carves up Africa | Mao proclaims People's China | Sputnik opens the space age | Deng opens China to the market,True
+German Empire,1850,1900,0.0425,surge,0.0,0.0425,French Second Republic | German Confederation,Bismarck forges the German Empire | Berlin conference carves up Africa,True
+Northern Wei,500,550,-0.0424,collapse,0.0424,0.0,Eastern Wei | Western Wei,Northern Wei splits east and west | Gao Huan enthrones the Eastern Wei,True
+Sena Dynasty,1050,1100,0.0422,surge,0.0,0.0422,Kamarupa Kingdom | Pala Empire,Kaivarta revolt rends Pala Varendra | Vijaya Sena rises as Pala grip fails,True
+White Huns,500,550,-0.0416,collapse,0.0556,0.014,,White Huns batter Persia and India,True
+Sena Dynasty,1200,1250,-0.0413,collapse,0.0413,0.0,,Bakhtiyar Khalji storms Nadia,True
+Kingdom of the Franks,800,850,-0.041,collapse,0.041,0.0,East Franks | Middle Franks | West Franks,Charlemagne crowned in Rome | Verdun splits the Frankish empire,True
+Kingdom of Spain,1500,1550,0.0409,surge,0.0,0.0409,Crown of Castile,Columbus sails to the Americas,True
+Eastern Wei,550,600,-0.0404,collapse,0.0404,0.0,Sui Dynasty,Gao Huan enthrones the Eastern Wei | Sui reunites China | Grand Canal links China's rivers,True
+Eastern Wei,500,550,0.0404,surge,0.0,0.0404,Northern Wei,Northern Wei splits east and west | Gao Huan enthrones the Eastern Wei,True
+Southern Song,1050,1100,0.0401,surge,0.1361,0.1762,,Jin take Kaifeng; Song flee south,True
+Han Dynasty,-150,-100,0.04,surge,0.1538,0.1938,Nanyue | Xiongnu,Zhang Qian opens the Silk Road | Sima Qian writes China's history,True
+Pala Empire,1050,1100,-0.0399,collapse,0.0636,0.0237,Gahadavala Dynasty | Sena Dynasty,Kaivarta revolt rends Pala Varendra | Gahadavala Chandradeva seizes Kanauj | Vijaya Sena rises as Pala grip fails,True
+Western Roman Empire,400,450,-0.0397,collapse,0.0895,0.0497,Vandal Kingdom,Alaric's Goths sack Rome | Augustine writes the City of God | Attila turned back in Gaul | Last emperor of the West deposed,True
+Zhou Dynasty,-1250,-1000,0.0387,surge,0.0,0.0387,,Zhou triumph at Muye; Shang falls | Mandate of Heaven proclaimed,True
+Pala Empire,850,900,-0.0387,collapse,0.1249,0.0862,Gurjara-Pratihara Dynasty,Nalanda draws monks from all Asia | Pratiharas wrest Magadha from the Palas,True
+French Consulate,1800,1850,-0.0385,collapse,0.0385,0.0,French Second Republic | German Confederation,Napoleon crowns himself emperor,True
+French Consulate,1750,1800,0.0385,surge,0.0,0.0385,Kingdom of France | Ottoman Empire,Encyclopédie spreads Enlightenment | Bastille falls; France in revolution | Napoleon crowns himself emperor,True
+Greco-Bactrian Kingdom,-200,-150,0.0385,surge,0.006,0.0445,,Demetrius takes Bactrian arms into India | Yuezhi nomads overrun Bactria,True
+Macedonian Empire,-320,-300,-0.0378,collapse,0.0449,0.0071,Kingdom of Lysimachus | Maurya Empire | Seleucid Empire,Alexander storms into Asia | Chandragupta founds Maurya Empire,True
+Tughlaq Dynasty,1400,1450,-0.0378,collapse,0.0378,0.0,Sayyid Dynasty,Timur sacks Delhi,True
+Spanish Empire,1500,1550,0.0377,surge,0.0,0.0377,Aztec Triple Alliance | Inca Empire,Cortés topples the Aztecs | Pizarro seizes Atahualpa | Potosí silver floods the world,True
+Western Satraps,400,450,-0.0369,collapse,0.0369,0.0,Gupta Empire,Kalidasa graces the Gupta court | Nalanda university founded,True
+Gurjara-Pratihara Dynasty,700,750,0.0369,surge,0.0,0.0369,Maitraka Dynasty,Nagabhata's Pratiharas repel Arab thrust,True
+Macedonian Empire,-325,-320,0.0364,surge,0.0085,0.0449,Ptolemaic Kingdom,Alexander storms into Asia | Great Library rises at Alexandria,True
+Gupta Empire,400,450,0.0363,surge,0.2465,0.2829,Western Satraps,Kalidasa graces the Gupta court | Nalanda university founded,True
+Bahmani Sultanate,1350,1400,0.0359,surge,0.0,0.0359,Tughlaq Dynasty,Ghiyasuddin Tughlaq seizes Delhi | Tughlaq armies annex Kakatiya Warangal | Timur sacks Delhi,True
+Indo-Scythians,-100,-50,0.0351,surge,0.0048,0.0399,Indo-Greeks,Maues' Sakas overrun Greek Gandhara,True
+Seleucid Empire,-320,-300,0.035,surge,0.0,0.035,Macedonian Empire | Ptolemaic Kingdom,Alexander storms into Asia | Great Library rises at Alexandria,True
+Yadava Dynasty,1150,1200,0.035,surge,0.0,0.035,Western Chalukya Empire,Bhillama throws off Chalukya yoke | Yadavas and Kakatiyas carve up Kalyani,True
+Harsha's Empire,650,700,-0.035,collapse,0.035,0.0,Khadga Dynasty,Brahmagupta reckons with zero,True
+Harsha's Empire,600,650,0.035,surge,0.0,0.035,Maukhari Dynasty,Brahmagupta reckons with zero,True
+Indo-Greeks,-150,-100,0.035,surge,0.0,0.035,Greco-Bactrian Kingdom,Demetrius takes Bactrian arms into India | Yuezhi nomads overrun Bactria,True
+British Africa,1950,2000,-0.0345,collapse,0.0345,0.0,Federal Republic of Nigeria,Winds of change sweep empire from Africa,True
+Kalabhra Dynasty,350,400,0.0344,surge,0.0,0.0344,Late Pallava Empire,Pallavas of Kanchi eclipse Chola power | Kalabhras overrun the Tamil kingdoms,True
+Holy Roman Empire Minor States,1250,1300,0.0343,surge,0.0,0.0343,Holy Roman Empire,Death of Frederick II; Great Interregnum | Hohenstaufen fall; princes go their way,True
+United States of America,1850,1900,0.0342,surge,0.0182,0.0524,,Civil War rends the Union | Wall Street crashes; world slump,True
+Ghurid Dynasty,1200,1250,-0.0337,collapse,0.0337,0.0,Mongol Empire,Muhammad of Ghor triumphs at Tarain | Temujin proclaimed Genghis Khan,True
+Ghurid Dynasty,1150,1200,0.0337,surge,0.0,0.0337,Ghaznavid Empire,Ghor takes Lahore; Ghaznavid line ends | Muhammad of Ghor triumphs at Tarain,True
+Maratha Empire,1700,1750,0.0336,surge,0.0009,0.0345,Mughal Empire,Shivaji crowned Chhatrapati | Nader Shah sacks Mughal Delhi,True
+Islamic Republic of Pakistan,1900,1950,0.0335,surge,0.0,0.0335,British Raj,Gandhi's Salt March defies the Raj,True
+Vijayanagara Empire,1550,1600,-0.0334,collapse,0.0334,0.0,,Talikota: sultans raze Vijayanagara,True
+Pandya Empire,1200,1250,0.0328,surge,0.0,0.0328,Chola Empire,Sundara Pandya sacks the Chola heartland | Kadava chief humbles Rajaraja Chola,True
+Pandya Empire,1300,1350,-0.0328,collapse,0.0328,0.0,Vijayanagara Empire,Vijayanagara empire rises in south,True
+Pala Empire,900,950,-0.0325,collapse,0.0862,0.0537,,Pratiharas wrest Magadha from the Palas,True
+Qin,-250,-200,-0.0324,collapse,0.0324,0.0,Han Dynasty,First Emperor unites China | Great Wall rises against the steppe | Liu Bang founds the Han,True
+Yadava Dynasty,1300,1350,-0.032,collapse,0.032,0.0,Tughlaq Dynasty,Delhi flays Harapala; Devagiri annexed | Ghiyasuddin Tughlaq seizes Delhi | Tughlaq armies annex Kakatiya Warangal,True
+Vijayanagara Empire,1300,1350,0.032,surge,0.0,0.032,Kakatiya Dynasty | Pandya Empire,Vijayanagara empire rises in south,True
+Later Han,900,950,0.0318,surge,0.0,0.0318,Tang Dynasty,"Diamond Sutra, oldest printed book",True
+Later Han,950,1000,-0.0318,collapse,0.0318,0.0,Northern Song,Song dynasty reunifies China | World's first paper money issued,True
+Kingdom of France,1750,1800,-0.0317,collapse,0.0317,0.0,French Consulate,Encyclopédie spreads Enlightenment | Bastille falls; France in revolution | Napoleon crowns himself emperor,True
+Ghaznavid Empire,1150,1200,-0.0316,collapse,0.0316,0.0,Ghurid Dynasty,Ghor takes Lahore; Ghaznavid line ends | Muhammad of Ghor triumphs at Tarain,True
+Republic of Indonesia,1900,1950,0.0304,surge,0.0,0.0304,Dutch East Indies,Krakatoa explodes,True
+Han Dynasty,150,200,-0.0304,collapse,0.1725,0.142,Cao Cao,Red Cliffs: Cao Cao turned back,True
+Ottoman Empire,1500,1550,0.0292,surge,0.0155,0.0446,Aq Qoyunlu | Mamluk Sultanate,Suleiman: Ottoman power at zenith,True
+Maratha Empire,1750,1800,0.0292,surge,0.0345,0.0636,Mughal Empire,Nader Shah sacks Mughal Delhi,True
+Empire of Japan,1850,1900,0.029,surge,0.0,0.029,Qing Dynasty | Tokugawa Shogunate,Opium War pries China open | Taiping rebellion bleeds China | Perry's black ships open Japan | Meiji restoration remakes Japan | Qing falls; China a republic,True
+Empire of Japan,1900,1950,-0.029,collapse,0.029,0.0,United States of America,Civil War rends the Union | Meiji restoration remakes Japan | Wall Street crashes; world slump | Atom bomb levels Hiroshima | Man walks on the Moon,True
+Republic of Brazil,1950,2000,0.0287,surge,0.0,0.0287,Brazilian Republic,Brazil restyled Federative Republic,True
+Northern Wei,450,500,0.0284,surge,0.014,0.0424,Liu Song Dynasty,"Liu Yu usurps Jin, founds Song | Northern Wei unify north China | Northern Wei splits east and west",True
+French Second Republic,1850,1900,-0.0283,collapse,0.0283,0.0,French Third Republic | German Empire,Bismarck forges the German Empire | Berlin conference carves up Africa,True
+French Second Republic,1800,1850,0.0283,surge,0.0,0.0283,French Consulate,Napoleon crowns himself emperor,True
+Bahmani Sultanate,1450,1500,-0.0281,collapse,0.0281,0.0,Bijapur Sultanate,Gawan slain; Bahmani Deccan splinters,True
+Liao Dynasty,1100,1150,-0.0279,collapse,0.0279,0.0,Great Jin,Jurchen revolt topples the Liao,True
+Habsburg Monarchy,1800,1850,-0.0279,collapse,0.0279,0.0,,Francis proclaims the Austrian Empire,True
+Chola Empire,1200,1250,-0.0278,collapse,0.0284,0.0006,Pandya Empire,Sundara Pandya sacks the Chola heartland | Kadava chief humbles Rajaraja Chola,True
+Sasanian Empire,600,650,-0.0276,collapse,0.0276,0.0,Rashidun Caliphate,Yarmouk: Arab armies take Syria | Sasanian Persia falls to the Arabs,True
+Indo-Greeks,-100,-50,-0.0275,collapse,0.035,0.0076,Indo-Scythians | Kanva Dynasty,Maues' Sakas overrun Greek Gandhara | Vasudeva Kanva slays Shunga king | Satavahanas overthrow the last Kanva,True
+Qing Dynasty,1800,1850,0.0272,surge,0.3132,0.3404,,Opium War pries China open | Taiping rebellion bleeds China,True
+Maitraka Dynasty,700,750,-0.0272,collapse,0.0272,0.0,Gurjara-Pratihara Dynasty,Nagabhata's Pratiharas repel Arab thrust,True
+Median Kingdom,-600,-550,-0.0272,collapse,0.0272,0.0,Achaemenid Empire,Zoroaster preaches in Iran,True
+Median Kingdom,-650,-600,0.0272,surge,0.0,0.0272,,Zoroaster preaches in Iran,True
+British Africa,1850,1900,0.0271,surge,0.0,0.0271,,,False
+Gupta Empire,350,400,0.0268,surge,0.2197,0.2465,Late Pallava Empire | Vakataka Kingdom | Yaudheya Republic,Pallavas of Kanchi eclipse Chola power | Samudragupta conquers north India | Kalidasa graces the Gupta court | Nalanda university founded,True
+Xiongnu,-250,-200,0.0268,surge,0.0,0.0268,,Modu forges the Xiongnu empire,True
+Roman Republic,-250,-200,0.0263,surge,0.0143,0.0406,,Hannibal crosses the Alps,True
+Republic of India,1950,2000,0.0261,surge,0.1464,0.1724,Estado Novo | French Indochina,India freed; Partition bleeds,True
+Holy Roman Empire,950,1000,0.0257,surge,0.0,0.0257,,Otto crowned; Holy Roman Empire born,True
+Sasanian Empire,200,250,0.0254,surge,0.0,0.0254,Parthian Empire,Ardashir topples the Parthians | Mani preaches a new world faith,True
+Bijapur Sultanate,1650,1700,-0.0253,collapse,0.0253,0.0,Mughal Empire,Taj Mahal rises at Agra | Nader Shah sacks Mughal Delhi,True
+Western Satraps,100,150,0.0252,surge,0.0218,0.047,Satavahana Dynasty,"Nagarjuna, philosopher of emptiness",True
+Satavahana Dynasty,100,150,-0.0252,collapse,0.079,0.0537,Western Satraps,"Nagarjuna, philosopher of emptiness",True
+Xiongnu,-150,-100,-0.0252,collapse,0.0285,0.0034,Han Dynasty,Zhang Qian opens the Silk Road | Sima Qian writes China's history,True
+Ilkhanate,1250,1300,0.0249,surge,0.0,0.0249,Mongol Empire,,False
+Ilkhanate,1300,1350,-0.0249,collapse,0.0249,0.0,,,False
+Western Jin,300,350,-0.0245,collapse,0.0858,0.0614,Former Yan | Later Zhao,Luoyang sacked; Jin flees south,True
+Yue,-350,-325,-0.0244,collapse,0.0244,0.0,Chu,,False
+Tokugawa Shogunate,1850,1900,-0.0244,collapse,0.0244,0.0,Empire of Japan,Perry's black ships open Japan | Meiji restoration remakes Japan,True
+Vakataka Kingdom,450,500,0.0243,surge,0.0386,0.0629,Gupta Empire,"Kalidasa graces the Gupta court | Nalanda university founded | Aryabhata: earth spins, pi reckoned",True
+Assyrian Egypt,-650,-600,-0.0241,collapse,0.0241,0.0,Neo-Babylonian Empire | Twenty-sixth Dynasty of Egypt,Jerusalem burns; exile to Babylon,True
+Assyrian Egypt,-700,-650,0.0241,surge,0.0,0.0241,Kingdom of Kush | Neo-Assyrian Empire,Assyria carries Israel captive | Kushite pharaohs crowned in Egypt | Nineveh falls; Assyria blotted out,True
+Neo-Assyrian Empire,-650,-600,-0.0239,collapse,0.0239,0.0,,Nineveh falls; Assyria blotted out,True
+Qin,-320,-300,0.0239,surge,0.0044,0.0283,,,False
+Russian Federation,1950,2000,0.0239,surge,0.0,0.0239,Union of Soviet Socialist Republics,Sputnik opens the space age | Soviet Union dissolves,True
+French Third Republic,1850,1900,0.0238,surge,0.0,0.0238,French Second Republic,,False
+Neo-Babylonian Empire,-650,-600,0.0238,surge,0.0,0.0238,Assyrian Egypt,Jerusalem burns; exile to Babylon,True
+French Third Republic,1900,1950,-0.0238,collapse,0.0238,0.0,French Fourth Republic,,False
+Tulunids,900,950,-0.0237,collapse,0.0237,0.0,,,False
+Tulunids,850,900,0.0237,surge,0.0,0.0237,Abbasid Caliphate,Al-Khwarizmi gives algebra its name,True
+Kadamba Empire,350,400,0.0236,surge,0.0,0.0236,Vakataka Kingdom,,False
+Parthian Empire,200,250,-0.0233,collapse,0.0233,0.0,Sasanian Empire,Ardashir topples the Parthians | Mani preaches a new world faith,True
+Chalukya Dynasty,550,600,0.0233,surge,0.0,0.0233,Kadamba Empire | Vakataka Kingdom,Vakatakas fade; Badami Chalukyas rise | Pulakeshin II checks Harsha at Narmada,True
+Warring States Japan,1450,1500,0.0233,surge,0.0,0.0233,Ashikaga Shogunate,,False
+Timurid Empire,1350,1400,0.0232,surge,0.0,0.0232,,,False
+Gurjara-Pratihara Dynasty,950,1000,-0.0232,collapse,0.0334,0.0102,Chauhan Dynasty | Pala Empire | Paramara Dynasty,,False
+Kakatiya Dynasty,1300,1350,-0.0231,collapse,0.0231,0.0,Tughlaq Dynasty | Vijayanagara Empire,Ghiyasuddin Tughlaq seizes Delhi | Tughlaq armies annex Kakatiya Warangal | Vijayanagara empire rises in south,True
+Abbasid Caliphate,950,1000,-0.0231,collapse,0.0231,0.0,Buyid Dynasty | Fatimid Caliphate,Fatimids found Cairo and al-Azhar | Avicenna's Canon of Medicine,True
+Han Dynasty,-100,-50,0.023,surge,0.1938,0.2168,,Zhang Qian opens the Silk Road | Sima Qian writes China's history,True
+Former Yan,300,350,0.0229,surge,0.0,0.0229,Western Jin,Luoyang sacked; Jin flees south,True
+Former Yan,350,400,-0.0229,collapse,0.0229,0.0,Later Yan | Western Jin,"Luoyang sacked; Jin flees south | Liu Yu usurps the Jin, founds Song",True
+Kingdom of Spain,1550,1600,-0.0229,collapse,0.0409,0.0179,Habsburg Monarchy,,False
+Byzantine Empire,600,650,0.0228,surge,0.0,0.0228,Eastern Roman Empire,,False
+Pala Empire,700,750,0.0228,surge,0.0,0.0228,Khadga Dynasty,"Bengal elects Gopala, Palas rise",True
+Pala Empire,1150,1200,-0.0228,collapse,0.0228,0.0,,,False
+Tokugawa Shogunate,1600,1650,0.0226,surge,0.0156,0.0382,Warring States Japan,Tokugawa shogunate founded at Edo,True
+Nawab of Awadh,1700,1750,0.0226,surge,0.0,0.0226,Mughal Empire,Nader Shah sacks Mughal Delhi,True
+Chu,-350,-325,0.0226,surge,0.029,0.0516,Yue,,False
+Indo-Scythians,0,50,-0.0226,collapse,0.0419,0.0194,Indo-Parthians | Western Satraps,,False
+Kadamba Empire,550,600,-0.0225,collapse,0.0225,0.0,Chalukya Dynasty,Pulakeshin II checks Harsha at Narmada,True
+Kingdom of the Franks,750,800,0.0222,surge,0.0188,0.041,,Charles Martel halts Arabs at Tours | Charlemagne crowned in Rome,True
+Fatimid Caliphate,950,1000,0.0222,surge,0.0087,0.0309,Abbasid Caliphate,Fatimids found Cairo and al-Azhar,True
+Ostrogothic Kingdom,450,500,0.0221,surge,0.0,0.0221,Western Roman Empire,Alaric's Goths sack Rome | Augustine writes the City of God | Attila turned back in Gaul | Last emperor of the West deposed | Benedict founds Monte Cassino,True
+Ashikaga Shogunate,1450,1500,-0.0217,collapse,0.0218,0.0001,Warring States Japan,,False
+Minyue,-350,-325,0.0217,surge,0.0,0.0217,,,False
+Nanyue,-150,-100,-0.0216,collapse,0.0216,0.0,Han Dynasty,Zhang Qian opens the Silk Road | Sima Qian writes China's history,True
+Roman Republic,-150,-100,0.0215,surge,0.0448,0.0663,Seleucid Empire,,False
+Western Satraps,0,50,0.0215,surge,0.0,0.0215,Indo-Scythians,,False
+Russian Empire,1700,1750,0.0214,surge,0.0,0.0214,Ottoman Empire | Tsardom of Russia,Peter the Great builds St Petersburg,True
+Dutch East Indies,1900,1950,-0.0214,collapse,0.0214,0.0,Republic of Indonesia,Krakatoa explodes,True
+Brazilian Republic,1950,2000,-0.0214,collapse,0.0214,0.0,Republic of Brazil,Brazil restyled Federative Republic,True
+Ayyubid Sultanate,1150,1200,0.0213,surge,0.0,0.0213,Fatimid Caliphate,Saladin retakes Jerusalem,True
+Ayyubid Sultanate,1200,1250,-0.0213,collapse,0.0213,0.0,Mamluk Sultanate,Saladin retakes Jerusalem,True
+Kingdom of the Franks,500,550,0.0213,surge,0.0014,0.0227,Salian Franks,"Clovis, king of the Franks, baptized",True
+People's Republic of Bangladesh,1950,2000,0.0212,surge,0.0,0.0212,Islamic Republic of Pakistan,,False
+Nawab of Awadh,1800,1850,-0.0211,collapse,0.0211,0.0,British Empire,Darwin publishes the Origin,True
+Gurjara-Pratihara Dynasty,900,950,-0.0208,collapse,0.0542,0.0334,Chaulukya Dynasty,,False
+Hyderabad State,1700,1750,0.0208,surge,0.0,0.0208,Mughal Empire,Nader Shah sacks Mughal Delhi,True
+Hyderabad State,1750,1800,-0.0208,collapse,0.0208,0.0,British Empire,,False
+Austria-Hungary,1900,1950,-0.0207,collapse,0.0207,0.0,Union of Soviet Socialist Republics,Sputnik opens the space age,True
+Indus Valley Civilization,-2000,-1750,-0.0207,collapse,0.0286,0.0079,,Mohenjo-daro: planned brick city | Indus cities fade as rivers shift,True
+Austria-Hungary,1850,1900,0.0207,surge,0.0,0.0207,Austrian Empire,,False
+Japan,1950,2000,0.0205,surge,0.0,0.0205,United States of America,Wall Street crashes; world slump | Man walks on the Moon | Jets topple the Twin Towers,True
+Shu Han,250,300,-0.0204,collapse,0.0204,0.0,Western Jin,Luoyang sacked; Jin flees south,True
+Shu Han,200,250,0.0204,surge,0.0,0.0204,Han Dynasty,,False
+Federal Republic of Nigeria,1950,2000,0.0203,surge,0.0,0.0203,British Africa,Winds of change sweep empire from Africa,True
+Samanid Empire,950,1000,-0.0203,collapse,0.0203,0.0,Ghaznavid Empire,,False
+Abbasid Caliphate,700,750,0.0202,surge,0.0,0.0202,Umayyad Caliphate,Karbala: Shia mourn Husayn | Round city of Baghdad founded,True
+People's Republic of China,2000,2015,-0.0202,collapse,0.2067,0.1865,,Deng opens China to the market,True
+French Africa,1950,2000,-0.0202,collapse,0.0202,0.0,,Algeria breaks free of France,True
+Vijayanagara Empire,1500,1550,-0.0201,collapse,0.0535,0.0334,Golconda Sultanate,Talikota: sultans raze Vijayanagara,True
+Wu,-800,-750,0.0201,surge,0.0,0.0201,Zhou Dynasty,Zhou court flees east to Luoyang,True
+Han Dynasty,100,150,-0.0198,collapse,0.1923,0.1725,,Buddhism reaches the Han court | Cai Lun perfects papermaking,True
+Yaudheya Republic,300,350,0.0197,surge,0.0,0.0197,,,False
+Yaudheya Republic,350,400,-0.0197,collapse,0.0197,0.0,Gupta Empire,Samudragupta conquers north India | Kalidasa graces the Gupta court | Nalanda university founded,True
+Western Chalukya Empire,1000,1050,-0.0197,collapse,0.0712,0.0515,Chola Empire,Chalukya rule restored from Kalyani | Chola fleets strike Srivijaya,True
+Middle Kingdom of Egypt,-1750,-1500,-0.0197,collapse,0.0197,0.0,New Kingdom of Egypt,Ahmose expels Hyksos; New Kingdom | Hatshepsut's fleet sails to Punt,True
+Ptolemaic Kingdom,-320,-300,-0.0196,collapse,0.0474,0.0279,Seleucid Empire,Great Library rises at Alexandria,True
+Paramara Dynasty,950,1000,0.0194,surge,0.0,0.0194,Gurjara-Pratihara Dynasty,,False
+Kingdom of Italy,1900,1950,-0.0193,collapse,0.0193,0.0,Republic of Italy,,False
+Hittites,-1250,-1000,-0.0193,collapse,0.0193,0.0,,Kadesh: greatest chariot battle,True
+Kingdom of Italy,1850,1900,0.0193,surge,0.0,0.0193,Austrian Empire,,False
+Later Yan,400,450,-0.0193,collapse,0.0193,0.0,Liu Song Dynasty,"Liu Yu usurps Jin, founds Song",True
+Later Yan,350,400,0.0193,surge,0.0,0.0193,Former Yan,,False
+Durrani Empire,1800,1850,-0.0192,collapse,0.0192,0.0,British Empire,Darwin publishes the Origin,True
+Tang Dynasty,700,750,-0.0191,collapse,0.1309,0.1117,,Talas: papermaking spreads west | An Lushan revolt guts the Tang,True
+New Kingdom of Egypt,-1750,-1500,0.0191,surge,0.0,0.0191,Middle Kingdom of Egypt,Ahmose expels Hyksos; New Kingdom | Hatshepsut's fleet sails to Punt,True
+Neo-Babylonian Empire,-550,-500,-0.0191,collapse,0.0191,0.0,Achaemenid Empire,"Jerusalem burns; exile to Babylon | Cyrus takes Babylon, frees exiles",True
+Chu,-800,-750,0.0189,surge,0.0,0.0189,Zhou Dynasty,Zhou court flees east to Luoyang,True
+Indo-Scythians,50,100,-0.0189,collapse,0.0194,0.0005,Kushan Empire,Kanishka's Kushan golden age,True
+Kingdom of the Franks,600,650,-0.0189,collapse,0.0211,0.0022,Aquitaine,,False
+Austrian Empire,1850,1900,-0.0184,collapse,0.0184,0.0,Austria-Hungary | Kingdom of Italy,,False
+Western Wei,500,550,0.0184,surge,0.0,0.0184,Northern Wei | Southern Qi,"Xiao Daocheng usurps Liu Song throne | Xiao Yan topples Qi, founds Liang | Northern Wei splits east and west",True
+Austrian Empire,1800,1850,0.0184,surge,0.0,0.0184,,,False
+Western Wei,550,600,-0.0184,collapse,0.0184,0.0,Sui Dynasty,Sui reunites China | Grand Canal links China's rivers,True
+Iberian Union,1600,1650,-0.0183,collapse,0.0183,0.0,,,False
+Republic of Italy,1900,1950,0.0183,surge,0.0,0.0183,Kingdom of Italy,,False
+Iberian Union,1550,1600,0.0183,surge,0.0,0.0183,,,False
+Ostrogothic Kingdom,500,550,-0.0183,collapse,0.0221,0.0038,,Benedict founds Monte Cassino,True
+Angevin Empire,1200,1250,-0.0182,collapse,0.0182,0.0,,,False
+Twenty-sixth Dynasty of Egypt,-550,-500,-0.0181,collapse,0.0181,0.0,Achaemenid Empire,,False
+Southern Song,1200,1250,-0.018,collapse,0.124,0.1061,,,False
+Satavahana Dynasty,-50,0,0.018,surge,0.0587,0.0767,Kanva Dynasty,Vasudeva Kanva slays Shunga king | Satavahanas overthrow the last Kanva,True
+Kalabhra Dynasty,600,650,-0.0179,collapse,0.0179,0.0,Late Pallava Empire,,False
+Visigothic Kingdom,450,500,0.0179,surge,0.0013,0.0192,Western Roman Empire,Alaric's Goths sack Rome | Augustine writes the City of God | Attila turned back in Gaul | Last emperor of the West deposed,True
+Mughal Empire,1750,1800,-0.0179,collapse,0.0359,0.018,British Empire | Durrani Empire | Maratha Empire,Nader Shah sacks Mughal Delhi | Durrani forges an Afghan empire,True
+Durrani Empire,1750,1800,0.0178,surge,0.0014,0.0192,Afsharid Iran | Mughal Empire,Nader Shah sacks Mughal Delhi | Durrani forges an Afghan empire,True
+Vakataka Kingdom,350,400,-0.0178,collapse,0.0565,0.0387,Gupta Empire | Kadamba Empire,Samudragupta conquers north India | Kalidasa graces the Gupta court | Nalanda university founded,True
+Thirtieth Dynasty of Egypt,-400,-350,0.0178,surge,0.0,0.0178,Achaemenid Empire,Panini perfects Sanskrit grammar,True
+Afsharid Iran,1700,1750,0.0178,surge,0.0,0.0178,Mughal Empire | Safavid Dynasty,Afghans sack Isfahan; Safavids fall | Nader Shah sacks Mughal Delhi,True
+Afsharid Iran,1750,1800,-0.0178,collapse,0.0178,0.0,Durrani Empire | Qajar Dynasty,Durrani forges an Afghan empire,True
+Thirtieth Dynasty of Egypt,-350,-325,-0.0178,collapse,0.0178,0.0,Ptolemaic Kingdom,Great Library rises at Alexandria,True
+Achaemenid Empire,-400,-350,-0.0177,collapse,0.0923,0.0745,Thirtieth Dynasty of Egypt,Panini perfects Sanskrit grammar,True
+New Kingdom of Egypt,-850,-800,-0.0177,collapse,0.0177,0.0,Twenty-third Dynasty of Egypt,,False
+Ashikaga Shogunate,1300,1350,0.0177,surge,0.0,0.0177,Kamakura Shogunate,Kamikaze scatters Mongol armada,True
+Chola Empire,1000,1050,0.0176,surge,0.0413,0.0589,Western Chalukya Empire,Chalukya rule restored from Kalyani | Chola fleets strike Srivijaya,True
+French Fourth Republic,1900,1950,0.0175,surge,0.0,0.0175,French Third Republic | German Empire,Bismarck forges the German Empire | Berlin conference carves up Africa,True
+French Fourth Republic,1950,2000,-0.0175,collapse,0.0175,0.0,Federated Republic of Germany | French Fifth Republic,,False
+Twenty-sixth Dynasty of Egypt,-650,-600,0.0175,surge,0.0,0.0175,Assyrian Egypt,,False
+Ptolemaic Kingdom,-50,0,-0.0175,collapse,0.0175,0.0,Roman Empire,"Cleopatra dies; Egypt made Roman | Augustus, first Roman emperor | Jesus born in Roman Judea | Jesus of Nazareth crucified",True
+Late Pallava Empire,800,850,-0.0174,collapse,0.0174,0.0,,,False
+Aztec Triple Alliance,1500,1550,-0.0174,collapse,0.0174,0.0,Spanish Empire,Cortés topples the Aztecs | Potosí silver floods the world,True
+Ottoman Empire,1550,1600,0.0174,surge,0.0446,0.0621,,Suleiman: Ottoman power at zenith,True
+Tang Dynasty,750,800,-0.0174,collapse,0.1117,0.0943,,Talas: papermaking spreads west | An Lushan revolt guts the Tang,True
+Khadga Dynasty,700,750,-0.0173,collapse,0.0173,0.0,Pala Empire,"Bengal elects Gopala, Palas rise",True
+Khadga Dynasty,650,700,0.0173,surge,0.0,0.0173,Harsha's Empire,Brahmagupta reckons with zero,True
+Southern Wu,900,950,0.0172,surge,0.0,0.0172,Tang Dynasty,"Diamond Sutra, oldest printed book",True
+Southern Wu,950,1000,-0.0172,collapse,0.0172,0.0,Northern Song,Song dynasty reunifies China | World's first paper money issued,True
+Kingdom of Great Britain,1700,1750,0.0171,surge,0.0,0.0171,Kingdom of England,Newton's Principia published | Watt's steam engine powers industry,True
+Samanid Empire,850,900,0.017,surge,0.0,0.017,Abbasid Caliphate,Al-Khwarizmi gives algebra its name,True
+Kakatiya Dynasty,1150,1200,0.017,surge,0.0,0.017,Western Chalukya Empire,Yadavas and Kakatiyas carve up Kalyani,True
+Yue,-500,-450,0.017,surge,0.0071,0.0241,Wu,,False
+Wu,-500,-450,-0.017,collapse,0.017,0.0,Yue,,False
+Western Satraps,200,250,0.0169,surge,0.0353,0.0523,Satavahana Dynasty,"Nagarjuna, philosopher of emptiness",True
+Vijayanagara Empire,1350,1400,0.0168,surge,0.032,0.0487,Hoysala Kingdom,Vijayanagara empire rises in south,True
+Neo-Assyrian Empire,-750,-700,0.0168,surge,0.0169,0.0337,,Assyria carries Israel captive,True
+Chauhan Dynasty,950,1000,0.0168,surge,0.0,0.0168,Gurjara-Pratihara Dynasty,,False
+Kingdom of Kush,-700,-650,-0.0167,collapse,0.018,0.0013,Assyrian Egypt,Kushite pharaohs crowned in Egypt,True
+Kingdom of Kush,-750,-700,0.0167,surge,0.0014,0.018,Twenty-third Dynasty of Egypt,Kushite pharaohs crowned in Egypt,True
+Pandya Dynasty,900,950,-0.0166,collapse,0.0166,0.0,Chola Empire,,False
+Russian Empire,1800,1850,0.0166,surge,0.0369,0.0536,Kingdom of Prussia,,False
+Kalabhra Dynasty,550,600,-0.0165,collapse,0.0344,0.0179,Pandya Dynasty,,False
+Carnatic Sultanate,1700,1750,0.0165,surge,0.0,0.0165,Mughal Empire | Nayaks of Madurai,Nader Shah sacks Mughal Delhi,True
+Roman Empire,0,50,0.0164,surge,0.1477,0.1641,,"Augustus, first Roman emperor | Jesus born in Roman Judea | Jesus of Nazareth crucified | Jerusalem temple destroyed",True
+Warring States Japan,1600,1650,-0.0163,collapse,0.0163,0.0,Tokugawa Shogunate,Tokugawa shogunate founded at Edo,True
+Ottoman Empire,1900,1950,-0.0163,collapse,0.0163,0.0,Republic of Turkey,Suez Canal weds the seas,True
+Pandya Dynasty,550,600,0.0161,surge,0.0,0.0161,Kalabhra Dynasty,,False
+Spanish Empire,1550,1600,-0.016,collapse,0.0377,0.0216,,Potosí silver floods the world,True
+Pala Empire,950,1000,0.016,surge,0.0537,0.0697,Gurjara-Pratihara Dynasty,,False
+East Franks,900,950,-0.0159,collapse,0.0159,0.0,,,False
+Mamluk Sultanate,1200,1250,0.0159,surge,0.0,0.0159,Ayyubid Sultanate,Saladin retakes Jerusalem,True
+Magadha - Haryanka dynasty,-550,-500,0.0159,surge,0.0,0.0159,,Buddha preaches the Middle Way | Mahavira founds the Jain path,True
+Mughal Empire,1800,1850,-0.0158,collapse,0.018,0.0022,British Empire,Darwin publishes the Origin,True
+Kingdom of Germany,950,1000,-0.0157,collapse,0.0157,0.0,,,False
+Kingdom of Germany,900,950,0.0157,surge,0.0,0.0157,,,False
+Eastern Ganga Kingdom,1350,1400,-0.0157,collapse,0.0157,0.0,,,False
+Carnatic Sultanate,1800,1850,-0.0157,collapse,0.0157,0.0,British Empire,Darwin publishes the Origin,True
+Tokugawa Shogunate,1550,1600,0.0156,surge,0.0,0.0156,Warring States Japan,Tokugawa shogunate founded at Edo,True
+Russian Empire,1750,1800,0.0156,surge,0.0214,0.0369,Ottoman Empire | Polish-Lithuanian Commonwealth,,False
+Liao Dynasty,900,950,0.0156,surge,0.0,0.0156,Tang Dynasty,"Diamond Sutra, oldest printed book",True
+Kingdom of Lysimachus,-300,-250,-0.0156,collapse,0.0156,0.0,,,False
+Kingdom of England,1700,1750,-0.0156,collapse,0.0156,0.0,Kingdom of Great Britain,Newton's Principia published | Watt's steam engine powers industry,True
+Hittites,-1500,-1250,0.0154,surge,0.0039,0.0193,,Hittites pioneer iron smelting | Kadesh: greatest chariot battle,True
+Chola Empire,1100,1150,-0.0154,collapse,0.0517,0.0363,Hoysala Kingdom,,False
+Ghaznavid Empire,1000,1050,0.0154,surge,0.0134,0.0289,,,False
+Heian Japan,750,800,0.0154,surge,0.0,0.0154,Nara Japan,,False
+Qi,-250,-200,-0.0154,collapse,0.0154,0.0,Han Dynasty,Liu Bang founds the Han,True
+Kamakura Shogunate,1300,1350,-0.0153,collapse,0.0153,0.0,Ashikaga Shogunate,Kamikaze scatters Mongol armada,True
+Middle Franks,800,850,0.0151,surge,0.0,0.0151,Kingdom of the Franks,Charlemagne crowned in Rome | Verdun splits the Frankish empire,True
+Angevin Empire,1150,1200,0.0151,surge,0.0031,0.0182,,,False
+Middle Franks,850,900,-0.0151,collapse,0.0151,0.0,,Verdun splits the Frankish empire,True
+Nanyue,-250,-200,0.0151,surge,0.0,0.0151,,,False
+Great Seljuk Empire,1000,1050,0.0149,surge,0.0,0.0149,Buyid Dynasty,Avicenna's Canon of Medicine | Seljuk Turks master Baghdad,True
+Kingdom of England,1650,1700,0.0147,surge,0.0009,0.0156,Commonwealth of England,Newton's Principia published,True
+Chola Empire,850,900,0.0147,surge,0.0018,0.0165,,,False
+Golconda Sultanate,1650,1700,-0.0147,collapse,0.0147,0.0,Mughal Empire,Taj Mahal rises at Agra | Nader Shah sacks Mughal Delhi,True
+Spanish Empire,1800,1850,-0.0145,collapse,0.0188,0.0043,United States of America,American colonies declare freedom | Bolívar liberates Spanish America | Civil War rends the Union,True
+Umayyad Caliphate,700,750,-0.0145,collapse,0.0799,0.0654,Abbasid Caliphate,Karbala: Shia mourn Husayn | Round city of Baghdad founded,True
+Ottoman Empire,1600,1650,-0.0144,collapse,0.0621,0.0476,,,False
+Parthian Empire,-200,-150,0.0144,surge,0.0011,0.0154,Seleucid Empire,Parthia breaks from the Seleucids,True
+Maitraka Dynasty,650,700,0.0144,surge,0.0128,0.0272,,,False
+Cao Cao,150,200,0.0143,surge,0.0,0.0143,Han Dynasty,Red Cliffs: Cao Cao turned back,True
+Tsardom of Russia,1700,1750,-0.0143,collapse,0.0143,0.0,Russian Empire,Peter the Great builds St Petersburg,True
+Cao Cao,200,250,-0.0143,collapse,0.0143,0.0,Cao Wei,"Red Cliffs: Cao Cao turned back | Wei, Shu, Wu: Three Kingdoms",True
+Roman Empire,300,350,-0.0142,collapse,0.19,0.1758,,Constantine embraces Christianity | Constantinople founded,True
+Later Shu,950,1000,-0.0142,collapse,0.0142,0.0,Northern Song,Song dynasty reunifies China | World's first paper money issued,True
+Xianbei,200,250,-0.0142,collapse,0.0142,0.0,,,False
+Later Shu,900,950,0.0142,surge,0.0,0.0142,Tang Dynasty,"Diamond Sutra, oldest printed book",True
+Nara Japan,700,750,0.0142,surge,0.0,0.0142,Asuka Japan,,False
+Nara Japan,750,800,-0.0142,collapse,0.0142,0.0,Heian Japan,,False
+Polish-Lithuanian Commonwealth,1750,1800,-0.0141,collapse,0.0141,0.0,Russian Empire,,False
+Western Jin,350,400,0.0141,surge,0.0614,0.0755,Former Yan | Later Zhao,"Luoyang sacked; Jin flees south | Liu Yu usurps the Jin, founds Song",True
+Mamluk Sultanate,1500,1550,-0.0141,collapse,0.0141,0.0,Ottoman Empire,Suleiman: Ottoman power at zenith,True
+Han Dynasty,0,50,-0.0141,collapse,0.2192,0.2051,,Wang Mang usurps the Han throne | Buddhism reaches the Han court,True
+Western Satraps,300,350,-0.014,collapse,0.0509,0.0369,Gupta Empire,Samudragupta conquers north India,True
+Indo-Sasanian Empire,250,300,0.014,surge,0.0,0.014,Western Kushans,,False
+Tang Dynasty,650,700,-0.014,collapse,0.1449,0.1309,,Tang dynasty rises at Chang'an,True
+White Huns,550,600,-0.014,collapse,0.014,0.0,,,False
+Chandela Kingdom,950,1000,0.014,surge,0.0,0.014,,,False
+Golden Horde,1250,1300,0.0139,surge,0.0,0.0139,Mongol Empire,,False
+Chola Empire,950,1000,0.0139,surge,0.0274,0.0413,,Chola fleets strike Srivijaya,True
+Chaulukya Dynasty,900,950,0.0139,surge,0.0,0.0139,Gurjara-Pratihara Dynasty,,False
+German Confederation,1800,1850,0.0139,surge,0.0,0.0139,French Consulate | Holy Roman Empire Minor States | Kingdom of Prussia,Napoleon crowns himself emperor,True
+German Confederation,1850,1900,-0.0139,collapse,0.0139,0.0,German Empire,Bismarck forges the German Empire | Berlin conference carves up Africa,True
+Visigothic Kingdom,700,750,-0.0138,collapse,0.0138,0.0,,Tariq leads Moors into Spain,True
+Kamakura Shogunate,1150,1200,0.0138,surge,0.0,0.0138,Heian Japan,Minamoto shoguns rule at Kamakura,True
+West Franks,800,850,0.0138,surge,0.0,0.0138,Kingdom of the Franks,Charlemagne crowned in Rome,True
+Indo-Sasanian Empire,350,400,-0.0137,collapse,0.0137,0.0,Kidarites,,False
+French Indochina,1950,2000,-0.0137,collapse,0.0137,0.0,Republic of India | Socialist Republic of Vietnam,India freed; Partition bleeds | Saigon falls; Vietnam united,True
+Dutch Republic,1750,1800,-0.0137,collapse,0.0137,0.0,British Empire,,False
+Eastern Ganga Kingdom,1050,1100,0.0136,surge,0.0,0.0136,,,False
+Satavahana Dynasty,150,200,0.0135,surge,0.0537,0.0672,Western Satraps,"Nagarjuna, philosopher of emptiness",True
+French Indochina,1850,1900,0.0135,surge,0.0,0.0135,,,False
+Ghaznavid Empire,950,1000,0.0134,surge,0.0,0.0134,Samanid Empire,,False
+Federated Republic of Germany,1950,2000,0.0134,surge,0.0,0.0134,Federal Republic of Germany | French Fourth Republic,,False
+Seleucid Empire,-200,-150,-0.0132,collapse,0.0335,0.0202,Parthian Empire,Parthia breaks from the Seleucids,True
+Shang Dynasty,-1750,-1500,0.0132,surge,0.0,0.0132,,Tang overthrows Xia; Shang begins,True
+Roman Empire,50,100,0.0131,surge,0.1641,0.1772,,Jesus of Nazareth crucified | Jerusalem temple destroyed,True
+Asuka Japan,700,750,-0.013,collapse,0.013,0.0,Nara Japan,,False
+Paramara Dynasty,1200,1250,-0.013,collapse,0.013,0.0,,,False
+Almohad Caliphate,1200,1250,-0.0129,collapse,0.013,0.0001,,Averroes expounds Aristotle,True
+Huns,350,400,0.0128,surge,0.0001,0.0128,Roman Empire,Constantine embraces Christianity | Constantinople founded | Huns burst into Europe,True
+Han Dynasty,50,100,-0.0128,collapse,0.2051,0.1923,,Buddhism reaches the Han court | Cai Lun perfects papermaking,True
+Late Pallava Empire,600,650,0.0128,surge,0.0043,0.0171,Kalabhra Dynasty,,False
+Huns,400,450,-0.0128,collapse,0.0128,0.0,,Huns burst into Europe,True
+Later Zhao,300,350,0.0127,surge,0.0,0.0127,Western Jin,Luoyang sacked; Jin flees south,True
+Kingdom of the Franks,650,700,0.0127,surge,0.0022,0.0149,,Charles Martel halts Arabs at Tours,True
+Twenty-third Dynasty of Egypt,-750,-700,-0.0127,collapse,0.0127,0.0,Kingdom of Kush,Kushite pharaohs crowned in Egypt,True
+Kingdom of Spain,1600,1650,0.0127,surge,0.0179,0.0306,,,False
+Twenty-third Dynasty of Egypt,-850,-800,0.0127,surge,0.0,0.0127,New Kingdom of Egypt,,False
+United States of America,1800,1850,0.0127,surge,0.0055,0.0182,Spanish Empire,American colonies declare freedom | Bolívar liberates Spanish America | Civil War rends the Union,True
+Later Zhao,350,400,-0.0127,collapse,0.0127,0.0,Later Qin | Western Jin,"Luoyang sacked; Jin flees south | Liu Yu usurps the Jin, founds Song",True
+Safavid Dynasty,1700,1750,-0.0126,collapse,0.0126,0.0,Afsharid Iran,Afghans sack Isfahan; Safavids fall,True
+French Fifth Republic,1950,2000,0.0125,surge,0.0,0.0125,French Fourth Republic,,False
+Byzantine Empire,1050,1100,-0.0125,collapse,0.0279,0.0154,Great Seljuk Empire,Great Schism splits Christendom | Seljuk Turks master Baghdad | Manzikert: Turks flood Anatolia,True
+Jin,-450,-400,-0.0124,collapse,0.0124,0.0,,Jin splits; Warring States begin,True
+Caliphate of Córdoba,1000,1050,-0.0124,collapse,0.0126,0.0002,,,False
+Dutch East Indies,1850,1900,0.0123,surge,0.0091,0.0214,,Krakatoa explodes,True
+Heian Japan,1150,1200,-0.0123,collapse,0.0123,0.0,Kamakura Shogunate,Minamoto shoguns rule at Kamakura,True
+Timurid Empire,1450,1500,-0.0123,collapse,0.0194,0.0071,Aq Qoyunlu,,False
+East Franks,800,850,0.0121,surge,0.0,0.0121,Kingdom of the Franks,Charlemagne crowned in Rome,True
+Buyid Dynasty,950,1000,0.012,surge,0.0028,0.0148,Abbasid Caliphate,Avicenna's Canon of Medicine,True
+Kalinga,-320,-300,0.012,surge,0.0,0.012,,Ashoka's bloody Kalinga conquest,True
+Polish-Lithuanian Commonwealth,1550,1600,0.0119,surge,0.0,0.0119,House of Jagiellon,Copernicus sets Earth in motion,True
+Western Kushans,200,250,0.0119,surge,0.0,0.0119,Kushan Empire,Sasanian onslaught splits Kushan realm,True
+Western Kushans,250,300,-0.0119,collapse,0.0119,0.0,Indo-Sasanian Empire,,False
+Sayyid Dynasty,1400,1450,0.0119,surge,0.0,0.0119,Tughlaq Dynasty,Timur sacks Delhi,True
+Kingdom of England,1200,1250,0.0119,surge,0.0,0.0119,,Magna Carta sealed at Runnymede,True
+Sayyid Dynasty,1450,1500,-0.0119,collapse,0.0119,0.0,Lodi Dynasty,Guru Nanak founds Sikhism,True
+Tang Dynasty,850,900,0.0119,surge,0.0943,0.1062,Nanzhao,"Diamond Sutra, oldest printed book",True
+Safavid Dynasty,1500,1550,0.0118,surge,0.0,0.0118,Aq Qoyunlu,Shah Ismail makes Persia Shia,True
+Rouran Khaganate,550,600,-0.0117,collapse,0.0117,0.0,,Göktürks topple the Rouran,True
+Seleucid Empire,-150,-100,-0.0117,collapse,0.0202,0.0086,Parthian Empire | Roman Republic,,False
+Salian Franks,500,550,-0.0116,collapse,0.0116,0.0,Kingdom of the Franks,"Clovis, king of the Franks, baptized",True
+Eastern Kushans,300,350,-0.0116,collapse,0.0116,0.0,Gupta Empire,Kushano-Sasanians overrun Gandhara | Samudragupta conquers north India,True
+Western Satraps,150,200,-0.0116,collapse,0.047,0.0353,Satavahana Dynasty,"Nagarjuna, philosopher of emptiness",True
+Vandal Kingdom,400,450,0.0115,surge,0.0,0.0115,Western Roman Empire,Alaric's Goths sack Rome | Augustine writes the City of God | Attila turned back in Gaul | Last emperor of the West deposed,True
+Great Seljuk Empire,1200,1250,-0.0114,collapse,0.0114,0.0,Mongol Empire,Temujin proclaimed Genghis Khan,True
+Southern Chu,900,950,0.0114,surge,0.0,0.0114,Tang Dynasty,"Diamond Sutra, oldest printed book",True
+Southern Chu,950,1000,-0.0114,collapse,0.0114,0.0,Northern Song,Song dynasty reunifies China | World's first paper money issued,True
+Gurjara-Pratihara Dynasty,750,800,0.0114,surge,0.0369,0.0482,Kannauj-Varman Dynasty,Yashovarman lifts Kannauj to empire | Nagabhata's Pratiharas repel Arab thrust | Palas and Pratiharas contest Kannauj,True
+Great Seljuk Empire,1050,1100,0.0113,surge,0.0149,0.0262,Byzantine Empire,Great Schism splits Christendom | Seljuk Turks master Baghdad | Manzikert: Turks flood Anatolia,True
+Lydia,-550,-500,-0.0113,collapse,0.0113,0.0,Achaemenid Empire,,False
+Kingdom of Prussia,1800,1850,-0.0112,collapse,0.0112,0.0,German Confederation | Russian Empire,,False
+Maitraka Dynasty,450,500,0.0112,surge,0.0,0.0112,Gupta Empire,"Kalidasa graces the Gupta court | Nalanda university founded | Aryabhata: earth spins, pi reckoned",True
+Joseon,1850,1900,-0.0111,collapse,0.0111,0.0,Korean Empire,,False
+Warring States Japan,1550,1600,-0.0111,collapse,0.0274,0.0163,Tokugawa Shogunate,Tokugawa shogunate founded at Edo,True
+Arab Republic of Egypt,1950,2000,0.0111,surge,0.0,0.0111,Kingdom of Egypt,,False
+Aq Qoyunlu,1500,1550,-0.011,collapse,0.011,0.0,Ottoman Empire | Safavid Dynasty,Shah Ismail makes Persia Shia | Suleiman: Ottoman power at zenith,True
+Chola Empire,900,950,0.0109,surge,0.0165,0.0274,Pandya Dynasty,,False
+Aztec Triple Alliance,1400,1450,0.0109,surge,0.0,0.0109,,,False
+Fatimid Caliphate,1150,1200,-0.0109,collapse,0.0109,0.0,Ayyubid Sultanate,Saladin retakes Jerusalem,True
+West Franks,950,1000,-0.0108,collapse,0.0108,0.0,,,False
+Federal Republic of Germany,1900,1950,0.0108,surge,0.0,0.0108,German Empire,Bismarck forges the German Empire | Berlin conference carves up Africa,True
+Federal Republic of Germany,1950,2000,-0.0108,collapse,0.0108,0.0,Federated Republic of Germany,,False
+Byzantine Empire,1200,1250,-0.0108,collapse,0.0108,0.0,,Crusaders sack Constantinople,True
+Rouran Khaganate,400,450,0.0107,surge,0.0,0.0107,,,False
+Kingdom of Lysimachus,-320,-300,0.0107,surge,0.0049,0.0156,Macedonian Empire,Alexander storms into Asia,True
+Brazilian Republic,1850,1900,0.0107,surge,0.0,0.0107,,,False
+Brazilian Republic,1900,1950,0.0107,surge,0.0107,0.0214,,,False
+Buyid Dynasty,1000,1050,-0.0107,collapse,0.0148,0.0041,Great Seljuk Empire,Avicenna's Canon of Medicine | Seljuk Turks master Baghdad,True
+Kingdom of Great Britain,1950,2000,-0.0107,collapse,0.0209,0.0102,,,False
+House of Jagiellon,1400,1450,0.0107,surge,0.0,0.0107,,,False
+House of Jagiellon,1550,1600,-0.0106,collapse,0.0106,0.0,Polish-Lithuanian Commonwealth,Copernicus sets Earth in motion,True
+Islamic Republic of Iran,1950,2000,0.0106,surge,0.0,0.0106,,Iran's revolution ousts the Shah,True
+Fatimid Caliphate,1000,1050,-0.0105,collapse,0.0309,0.0204,,Fatimids found Cairo and al-Azhar,True
+Ming Dynasty,1400,1450,0.0105,surge,0.153,0.1634,,"Hongwu expels Mongols, founds Ming | Zheng He's treasure fleets sail",True
+Inca Empire,1500,1550,-0.0105,collapse,0.0105,0.0,Spanish Empire,Pizarro seizes Atahualpa | Potosí silver floods the world,True
+Hamdanid Emirates,900,950,0.0104,surge,0.0,0.0104,,,False
+Parthian Empire,-150,-100,0.0104,surge,0.0154,0.0258,Seleucid Empire,,False
+Xianbei,50,100,0.0104,surge,0.0,0.0104,,,False
+Hoysala Kingdom,1100,1150,0.0103,surge,0.0,0.0103,Chola Empire,,False
+Neo-Assyrian Empire,-850,-800,0.0103,surge,0.0077,0.0179,,Ashurnasirpal builds Nimrud,True
+Rashtrakuta Dynasty,850,900,-0.0102,collapse,0.0868,0.0766,Gurjara-Pratihara Dynasty,,False
+Gurjara-Pratihara Dynasty,1000,1050,-0.0102,collapse,0.0102,0.0,,,False
+Habsburg Monarchy,1550,1600,0.0102,surge,0.0078,0.018,Kingdom of Spain,,False
+Chalukya Dynasty,650,700,-0.0101,collapse,0.0886,0.0784,,Pulakeshin II checks Harsha at Narmada,True
+Ottoman Empire,1700,1750,-0.0101,collapse,0.0419,0.0319,Russian Empire,,False
+Crown of Castile,1500,1550,-0.01,collapse,0.01,0.0,Kingdom of Spain,Columbus sails to the Americas,True
+Minyue,-250,-200,-0.0099,collapse,0.0223,0.0124,Han Dynasty,Liu Bang founds the Han,True
+Vandal Kingdom,500,550,-0.0099,collapse,0.0099,0.0,,,False
+Early Cholas,300,350,-0.0099,collapse,0.0099,0.0,Late Pallava Empire,Pallavas of Kanchi eclipse Chola power,True
+Aquitaine,600,650,0.0099,surge,0.0,0.0099,Kingdom of the Franks,,False
+Islamic Republic of Pakistan,1950,2000,-0.0098,collapse,0.0335,0.0237,People's Republic of Bangladesh,,False
+Holy Roman Empire Minor States,1800,1850,-0.0098,collapse,0.0098,0.0,German Confederation,,False
+Neo-Assyrian Empire,-700,-650,-0.0098,collapse,0.0337,0.0239,Assyrian Egypt,Assyria carries Israel captive | Nineveh falls; Assyria blotted out,True
+Kidarites,350,400,0.0097,surge,0.0,0.0097,Indo-Sasanian Empire,,False
+Vijayanagara Empire,1400,1450,0.0097,surge,0.0487,0.0585,,,False
+Indo-Parthians,50,100,-0.0096,collapse,0.0096,0.0,Kushan Empire,Kanishka's Kushan golden age,True
+Indo-Parthians,0,50,0.0096,surge,0.0,0.0096,Indo-Scythians,,False
+Kingdom of Mysore,1750,1800,-0.0096,collapse,0.0096,0.0,British Empire,,False
+Socialist Republic of Vietnam,1950,2000,0.0096,surge,0.0,0.0096,French Indochina,Saigon falls; Vietnam united,True
+Kidarites,450,500,-0.0096,collapse,0.0096,0.0,White Huns,White Huns batter Persia and India,True
+Pala Empire,800,850,-0.0095,collapse,0.1344,0.1249,,Nalanda draws monks from all Asia,True
+Emirate of Córdoba,750,800,0.0095,surge,0.0,0.0095,Umayyad Caliphate,,False
+Mughal Empire,1600,1650,0.0095,surge,0.21,0.2196,,Taj Mahal rises at Agra,True
+Salian Franks,450,500,0.0094,surge,0.0022,0.0116,Western Roman Empire,"Alaric's Goths sack Rome | Augustine writes the City of God | Attila turned back in Gaul | Last emperor of the West deposed | Clovis, king of the Franks, baptized",True
+Crown of Castile,1200,1250,0.0093,surge,0.0,0.0093,,,False
+Aq Qoyunlu,1450,1500,0.0093,surge,0.0017,0.011,Timurid Empire,,False
+Southern Han,900,950,0.0093,surge,0.0,0.0093,Tang Dynasty,"Diamond Sutra, oldest printed book",True
+Southern Han,950,1000,-0.0093,collapse,0.0093,0.0,Northern Song,Song dynasty reunifies China | World's first paper money issued,True
+Almohad Caliphate,1150,1200,0.0093,surge,0.0037,0.013,,Averroes expounds Aristotle,True
+Commonwealth of England,1650,1700,-0.0092,collapse,0.0092,0.0,Kingdom of England,Newton's Principia published,True
+Commonwealth of England,1600,1650,0.0092,surge,0.0,0.0092,Kingdom of England,Newton's Principia published,True
+Phrygia,-700,-650,-0.0092,collapse,0.0092,0.0,,,False
+Avar Khaganate,550,600,0.0091,surge,0.0,0.0091,,,False
+French Africa,1900,1950,0.0091,surge,0.0111,0.0202,,Algeria breaks free of France,True
+Great Seljuk Empire,1100,1150,-0.0091,collapse,0.0262,0.0172,,,False
+Kingdom of England,1600,1650,-0.009,collapse,0.0099,0.0009,Commonwealth of England,Newton's Principia published,True
+Sokoto Caliphate,1800,1850,0.009,surge,0.0,0.009,,,False
+Republic of Italy,1950,2000,-0.009,collapse,0.0183,0.0093,,,False
+Korean Empire,1900,1950,-0.0089,collapse,0.0089,0.0,,,False
+Chagatai Khanate,1250,1300,0.0089,surge,0.0,0.0089,Mongol Empire,,False
+Korean Empire,1850,1900,0.0089,surge,0.0,0.0089,Joseon,,False
+Nanzhao,850,900,-0.0089,collapse,0.0122,0.0032,Tang Dynasty,"Diamond Sutra, oldest printed book",True
+Golconda Sultanate,1500,1550,0.0088,surge,0.0,0.0088,Vijayanagara Empire,Talikota: sultans raze Vijayanagara,True
+Fatimid Caliphate,900,950,0.0087,surge,0.0,0.0087,,Fatimids found Cairo and al-Azhar,True
+Kingdom of France,1450,1500,0.0087,surge,0.0105,0.0193,,,False
+Ptolemaic Kingdom,-200,-150,-0.0087,collapse,0.027,0.0183,,Eratosthenes measures the Earth,True
+Almoravid Dynasty,1050,1100,0.0087,surge,0.0,0.0087,,,False
+Kingdom of Axum,500,550,0.0087,surge,0.0005,0.0092,Himyarite Kingdom,,False
+Chandela Kingdom,1300,1350,-0.0087,collapse,0.0087,0.0,Tughlaq Dynasty,Ghiyasuddin Tughlaq seizes Delhi | Tughlaq armies annex Kakatiya Warangal,True
+Hoysala Kingdom,1350,1400,-0.0086,collapse,0.0086,0.0,Vijayanagara Empire,Vijayanagara empire rises in south,True
+Kingdom of France,1200,1250,0.0086,surge,0.0021,0.0107,,,False
+Later Qin,350,400,0.0086,surge,0.0,0.0086,Later Zhao,,False
+Later Qin,400,450,-0.0086,collapse,0.0086,0.0,Liu Song Dynasty,"Liu Yu usurps Jin, founds Song",True
+French Africa,1850,1900,0.0086,surge,0.0026,0.0111,,,False
+Chaulukya Dynasty,1200,1250,-0.0086,collapse,0.0086,0.0,,,False
+Seleucid Empire,-100,-50,-0.0086,collapse,0.0086,0.0,Roman Republic,Caesar slain in the Senate,True
+Kingdom of Spain,1750,1800,-0.0086,collapse,0.0209,0.0123,,,False
+Qi,-800,-750,0.0085,surge,0.0,0.0085,Zhou Dynasty,Zhou court flees east to Luoyang,True
+Antigonid Macedonia,-300,-250,0.0085,surge,0.0,0.0085,,,False
+Nayaks of Madurai,1700,1750,-0.0085,collapse,0.0085,0.0,Carnatic Sultanate,,False
+Republic of Turkey,1900,1950,0.0085,surge,0.0,0.0085,Ottoman Empire,Suez Canal weds the seas,True
+Kingdom of Italy,950,1000,-0.0085,collapse,0.0085,0.0,,,False
+Tokugawa Shogunate,1750,1800,-0.0084,collapse,0.0376,0.0293,,,False
+Hungarian Nationalists,1800,1850,0.0084,surge,0.0,0.0084,,,False
+Emirate of Córdoba,900,950,-0.0084,collapse,0.0084,0.0,,,False
+Mexico,1850,1900,0.0084,surge,0.0,0.0084,,,False
+Bijapur Sultanate,1450,1500,0.0083,surge,0.0,0.0083,Bahmani Sultanate,Gawan slain; Bahmani Deccan splinters,True
+Fatimid Caliphate,1050,1100,-0.0083,collapse,0.0204,0.0121,,Crusaders storm Jerusalem,True
+Ottoman Empire,1750,1800,-0.0083,collapse,0.0319,0.0235,French Consulate | Russian Empire,Napoleon crowns himself emperor,True
+Kingdom of Egypt,1900,1950,0.0083,surge,0.0,0.0083,,,False
+Kingdom of Egypt,1950,2000,-0.0083,collapse,0.0083,0.0,Arab Republic of Egypt,,False
+Himyarite Kingdom,500,550,-0.0083,collapse,0.0083,0.0,Kingdom of Axum,,False
+Gurjara-Pratihara Dynasty,850,900,0.0083,surge,0.0459,0.0542,Pala Empire | Rashtrakuta Dynasty,Nalanda draws monks from all Asia | Pratiharas wrest Magadha from the Palas,True
+Kingdom of Numidia,-200,-150,0.0082,surge,0.0,0.0082,,,False
+Estado Novo,1900,1950,0.0082,surge,0.0,0.0082,,,False
+Ming Dynasty,1450,1500,0.0082,surge,0.1634,0.1716,,,False
+Kingdom of Thailand,1900,1950,0.0082,surge,0.0,0.0082,,,False
+Estado Novo,1950,2000,-0.0081,collapse,0.0082,0.0,Republic of India,India freed; Partition bleeds,True
+Qajar Dynasty,1750,1800,0.008,surge,0.0,0.008,Afsharid Iran,,False
+Neo-Assyrian Empire,-950,-900,0.008,surge,0.0,0.008,,Ashurnasirpal builds Nimrud,True
+Jin,-800,-750,0.008,surge,0.0,0.008,Zhou Dynasty,Zhou court flees east to Luoyang,True
+Asuka Japan,500,550,0.008,surge,0.0,0.008,,Buddhism reaches Japan,True
+Democratic Republic of the Congo,1950,2000,0.008,surge,0.0,0.008,,,False
+Chauhan Dynasty,1050,1100,-0.0078,collapse,0.0126,0.0047,,,False
+Kamarupa Kingdom,1050,1100,-0.0077,collapse,0.0121,0.0044,Sena Dynasty,Vijaya Sena rises as Pala grip fails,True
