@@ -47,8 +47,11 @@ derived from that data, not asserted.
   shown as a gray "stateless / unmapped" band rather than hidden, and a
   derived *unrecorded-states* overlay (hatched, colored by civilization) marks
   population that surely lived under *some* unmapped local polity.
-- **Side minimap** — a small world map that follows the hovered year, painting
-  each polity in its civilization's color: the histomap finally has a map.
+- **Navigation minimap** — an editor-style thumbnail of the whole chart down
+  the right edge, with a viewport indicator; click or drag to jump.
+- **World map** — a small map (bottom-left) that follows the hovered year,
+  painting each polity in its civilization's color: the histomap finally has
+  a map.
 - **Export** — download the current view (any palette, mode, or focus) as a
   print-ready **SVG** (vector, for true-size poster printing) or a 2× **PNG**.
 

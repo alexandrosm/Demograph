@@ -51,11 +51,23 @@
   footer { text-align: center; font-size: 11.5px; color: var(--muted);
            padding: 12px 16px 28px; }
   footer a { color: inherit; }
-  #minimap { position: fixed; right: 14px; top: 96px; width: 286px;
+  #minimap { position: fixed; left: 14px; bottom: 14px; width: 232px;
              background: var(--bg); border: 1px solid var(--muted);
              border-radius: 4px; padding: 6px 6px 2px; z-index: 20;
              box-shadow: 0 2px 10px rgba(0,0,0,0.18); pointer-events: none;
              opacity: 0.97; }
+  /* Editor-style navigation minimap: a thumbnail of the whole chart with a
+     viewport indicator; click/drag to scroll. */
+  #navmap { position: fixed; right: 0; top: 0; height: 100vh; width: 116px;
+            z-index: 18; cursor: pointer; background: var(--bg);
+            border-left: 1px solid var(--muted); }
+  #navmap-svg { width: 100%; height: 100%; display: block; opacity: 0.9; }
+  #navmap-svg .stream { stroke: none; }
+  #navmap-view { position: absolute; left: 0; width: 100%; pointer-events: none;
+                 background: rgba(128,128,128,0.16);
+                 border-top: 1.5px solid var(--ink);
+                 border-bottom: 1.5px solid var(--ink); }
+  @media (max-width: 1360px) { #navmap { display: none; } }
   #minimap svg { display: block; width: 100%; height: auto; }
   #minimap .mm-cap { font: 11px "Segoe UI", system-ui, sans-serif;
                      color: var(--muted); text-align: center; padding: 2px 0 1px;
@@ -126,6 +138,10 @@
   Esc returns. Controls in the &#9776; Options panel, top-left.</em></p>
 </header>
 <svg id="chart"></svg>
+<div id="navmap">
+  <svg id="navmap-svg" viewBox="0 0 1000 5097" preserveAspectRatio="none"></svg>
+  <div id="navmap-view"></div>
+</div>
 <div id="minimap">
   <svg id="minimap-svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet"></svg>
   <div class="mm-cap" id="mm-cap">the world &mdash; hover the chart</div>
@@ -454,6 +470,9 @@ let hideGray = false;
 let showEvents = true;
 let focus = null;  // null | {type:'civ', key} | {type:'region', key, anchor}
 let mmLandG = null, mmPolG = null, mmYear = null;  // minimap state (hoisted)
+const navEl = document.getElementById("navmap");      // navmap refs (hoisted:
+const navSvg = document.getElementById("navmap-svg");  // buildNavmap runs in
+const navView = document.getElementById("navmap-view"); // the first render())
 
 const stackKeys = () => hideGray ? polityKeys : [GRAY_L, ...polityKeys, GRAY_R];
 
@@ -893,7 +912,7 @@ function render(animate) {
     (animate ? sepM.transition().duration(900) : sepM)
       .attr("d", i => edgePath(byKey.get(keys[i])));
   }
-  const annotate = () => { drawLabels(items); drawEvents(items); };
+  const annotate = () => { drawLabels(items); drawEvents(items); buildNavmap(); };
   if (animate) setTimeout(annotate, 920);
   else annotate();
 }
@@ -953,6 +972,44 @@ function updateMinimap(year, hi) {
 }
 initMinimap();
 updateMinimap(1500, null);
+
+// ---- navigation minimap (editor-style): thumbnail of the whole chart -----
+function buildNavmap() {
+  if (!navSvg) return;
+  while (navSvg.firstChild) navSvg.removeChild(navSvg.firstChild);
+  navSvg.appendChild(streamG.node().cloneNode(true));  // streams only, no text
+  updateNavView();
+}
+function chartMetrics() {
+  const r = svg.node().getBoundingClientRect();
+  return { topDoc: r.top + window.scrollY, h: r.height || H };
+}
+function updateNavView() {
+  if (!navEl || !navView) return;
+  const { topDoc, h } = chartMetrics();
+  const strip = navEl.clientHeight;
+  const y = (window.scrollY - topDoc) / h * strip;
+  const vh = window.innerHeight / h * strip;
+  navView.style.top = Math.max(0, Math.min(strip - 8, y)) + "px";
+  navView.style.height = Math.max(10, Math.min(strip - Math.max(0, y), vh)) + "px";
+}
+let navDragging = false;
+function navScrollTo(clientY) {
+  const rect = navEl.getBoundingClientRect();
+  const f = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
+  const { topDoc, h } = chartMetrics();
+  window.scrollTo(0, topDoc + f * h - window.innerHeight / 2);
+}
+if (navEl) {
+  navEl.addEventListener("mousedown", e => {
+    navDragging = true; navScrollTo(e.clientY); e.preventDefault();
+  });
+  window.addEventListener("mousemove", e => { if (navDragging) navScrollTo(e.clientY); });
+  window.addEventListener("mouseup", () => { navDragging = false; });
+  window.addEventListener("scroll", updateNavView, { passive: true });
+  window.addEventListener("resize", updateNavView);
+}
+buildNavmap();
 
 function setFocus(f) { focus = f; render(true); }
 function setMode(m) {
